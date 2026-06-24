@@ -4,7 +4,7 @@ title = "GDM Union"
 [extra]
 hero_eyebrow = "Union Recognition Campaign"
 hero_title = "DeepMind Employees are Unionising"
-hero_tagline = """...to honour GDM's mission to "build AI responsibly to benefit humanity"."""
+hero_tagline = """...to honour our mission to "build AI responsibly to benefit humanity"."""
 hero_reason = "Recognition depends on numbers — the more of us who join, the stronger we negotiate."
 join_url = "https://utaw.tech/join"
 footer_tagline = "We are judged by what we stand for. **Your membership is critical.**"
