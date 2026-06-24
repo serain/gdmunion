@@ -53,7 +53,10 @@
   <section class="section section--tldr">
     <div class="container">
       <h2 class="section-title">TL;DR</h2>
-      <div class="section-content">{{ section.extra.tldr | markdown | safe }}</div>
+      <div class="section-content">
+        <p class="tldr-lead">{{ section.extra.tldr_lead | markdown(inline=true) | safe }}</p>
+        {{ section.extra.tldr | markdown | safe }}
+      </div>
     </div>
   </section>
 
@@ -103,7 +106,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <img src="{{ get_url(path='utaw-logo-bw.png') }}" alt="UTAW" class="footer-logo">
-      <p class="footer-tagline">{{ section.extra.footer_tagline }}</p>
+      <p class="footer-tagline">{{ section.extra.footer_tagline | markdown(inline=true) | safe }}</p>
       <a href="{{ section.extra.join_url }}" class="btn-cta" rel="noopener noreferrer">Join UTAW</a>
     </div>
   </footer>

@@ -7,15 +7,11 @@ hero_title = "DeepMind Employees are Unionising"
 hero_tagline = """...to honour GDM's mission to "build AI responsibly to benefit humanity"."""
 hero_reason = "Recognition depends on numbers — the more of us who join, the stronger we negotiate."
 join_url = "https://utaw.tech/join"
-footer_tagline = "We are judged by what we stand for. Your membership is critical."
+footer_tagline = "We are judged by what we stand for. **Your membership is critical.**"
 
+tldr_lead = "Our power is our numbers — the more of us who join, the more we can win."
 tldr = """
-FTEs from across GDM UK are currently in negotiations with Google to legally recognise our trade union.
-Our demands focus on AI safety, unethical military contracts, and guarantees over AI-led automation.
-Despite Google's claims to the contrary, there is considerable historical precedent to negotiate over these areas.
-
-**The strength of our negotiating position comes from the size of our membership** — so the more people who join, the better we can do.
-Our demands are shaped by members through democratic processes (one member, one vote).
+FTEs across GDM UK are negotiating with Google for legal union recognition — a real say over AI safety, unethical military contracts, and AI-led automation. Demands are set democratically: one member, one vote.
 """
 
 who_we_are = """
