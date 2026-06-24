@@ -15,6 +15,8 @@
   --fs-lead:     clamp(1.125rem, 2vw, 1.25rem);
   --fs-body:     1.0625rem;
   --fs-label:    0.8125rem;
+
+  --nav-h: 70px;
 }
 
 /* ─── 2. Reset ──────────────────────────────────────────────────── */
@@ -57,11 +59,11 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  min-height: 60px;
+  min-height: var(--nav-h);
 }
 
 .nav-logo {
-  height: 34px;
+  height: 46px;
   width: auto;
 }
 
@@ -234,7 +236,8 @@ body {
 }
 
 /* ─── 7. Section base ───────────────────────────────────────────── */
-.section { padding: 4.5rem 0; }
+/* scroll-margin keeps anchored headings clear of the sticky nav */
+.section { padding: 4.5rem 0; scroll-margin-top: var(--nav-h); }
 
 .section--dark {
   background: var(--navy);
