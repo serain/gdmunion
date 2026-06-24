@@ -9,8 +9,7 @@
   <meta property="og:description" content="{{ config.description }}">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="{{ config.base_url }}">
-  <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
-  <link rel="icon" type="image/png" href="{{ get_url(path='favicon-32.png') }}" sizes="32x32">
+  <link rel="icon" type="image/png" href="{{ get_url(path='utaw-logo-bw.png') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -53,60 +52,50 @@
 
   <section class="section section--tldr">
     <div class="container">
-      <div class="section-inner">
-        <h2 class="section-label">TL;DR</h2>
-        <div class="section-content">{{ section.extra.tldr | markdown | safe }}</div>
-      </div>
+      <h2 class="section-title">TL;DR</h2>
+      <div class="section-content">{{ section.extra.tldr | markdown | safe }}</div>
     </div>
   </section>
 
   <section id="who-we-are" class="section section--dark">
     <div class="container">
-      <div class="section-inner">
-        <h2 class="section-label">Who We Are</h2>
-        <div class="section-content">{{ section.extra.who_we_are | markdown | safe }}</div>
-      </div>
+      <h2 class="section-title">Who We Are</h2>
+      <div class="section-content">{{ section.extra.who_we_are | markdown | safe }}</div>
     </div>
   </section>
 
   <section id="what-happened" class="section">
     <div class="container">
-      <div class="section-inner">
-        <h2 class="section-label">What Happened</h2>
-        <div class="section-content">{{ section.extra.what_happened | markdown | safe }}</div>
-      </div>
+      <h2 class="section-title">What Happened</h2>
+      <div class="section-content">{{ section.extra.what_happened | markdown | safe }}</div>
     </div>
   </section>
 
   <section id="negotiate" class="section section--dark">
     <div class="container">
-      <div class="section-inner">
-        <h2 class="section-label">Can We Negotiate On This?</h2>
-        <div class="section-content">
-          {{ section.extra.negotiate_intro | markdown | safe }}
-          <ul>
-            {% for item in section.extra.precedents %}
-            <li>{{ item.text | markdown(inline=true) | safe }}</li>
-            {% endfor %}
-          </ul>
-          <div class="note">{{ section.extra.negotiate_note | markdown | safe }}</div>
-        </div>
+      <h2 class="section-title">Can We Negotiate On This?</h2>
+      <div class="section-content">
+        {{ section.extra.negotiate_intro | markdown | safe }}
+        <ul>
+          {% for item in section.extra.precedents %}
+          <li>{{ item.text | markdown(inline=true) | safe }}</li>
+          {% endfor %}
+        </ul>
+        <div class="note">{{ section.extra.negotiate_note | markdown | safe }}</div>
       </div>
     </div>
   </section>
 
   <section id="faq" class="section">
     <div class="container">
-      <div class="section-inner">
-        <h2 class="section-label">FAQ</h2>
-        <div class="section-content">
-          {% for item in section.extra.faqs %}
-          <details class="faq-item">
-            <summary>{{ item.question }}</summary>
-            <div class="faq-body">{{ item.answer | markdown | safe }}</div>
-          </details>
-          {% endfor %}
-        </div>
+      <h2 class="section-title">FAQ</h2>
+      <div class="section-content">
+        {% for item in section.extra.faqs %}
+        <details class="faq-item">
+          <summary>{{ item.question }}</summary>
+          <div class="faq-body">{{ item.answer | markdown | safe }}</div>
+        </details>
+        {% endfor %}
       </div>
     </div>
   </section>
