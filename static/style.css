@@ -1,0 +1,494 @@
+/* ─── 1. Custom properties ─────────────────────────────────────── */
+:root {
+  --navy:      #011548;
+  --blue:      #1565C0;
+  --blue-dark: #0D47A1;
+  --cyan:      #29B6F6;
+  --white:     #ffffff;
+  --text:      #0F172A;
+  --muted:     #374151;
+  --border:    rgba(0, 0, 0, 0.09);
+  --label-col: 160px;
+  --label-gap: 3.5rem;
+}
+
+/* ─── 2. Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── 3. Base ───────────────────────────────────────────────────── */
+body {
+  font-family: 'Barlow', -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ─── 4. Layout ─────────────────────────────────────────────────── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+/* ─── 5. Navigation ─────────────────────────────────────────────── */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--navy);
+  z-index: 100;
+}
+
+.nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 60px;
+}
+
+.nav-logo {
+  height: 34px;
+  width: auto;
+}
+
+/* Hidden checkbox powers the mobile toggle — no JS needed */
+.nav-toggle-check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-links .btn-join {
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.4rem 1.1rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.nav-links .btn-join:hover { background: var(--blue-dark); }
+
+/* ─── 6. Hero ───────────────────────────────────────────────────── */
+.hero {
+  background: var(--blue);
+  color: var(--white);
+  padding: 5.5rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Circle motifs — matches the flyer's decorative rings */
+.hero::before,
+.hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero::before {
+  width: 900px;
+  height: 900px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  top: -380px;
+  right: -220px;
+}
+
+.hero::after {
+  width: 580px;
+  height: 580px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  bottom: -300px;
+  left: -100px;
+}
+
+.hero .container::after {
+  content: '';
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  top: -80px;
+  right: 80px;
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  max-width: 720px;
+}
+
+.hero .tagline {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.55;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+}
+
+.btn-hero {
+  display: inline-block;
+  background: var(--white);
+  color: var(--blue);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.85rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.btn-hero:hover { background: rgba(255, 255, 255, 0.9); }
+
+/* ─── 7. Section base ───────────────────────────────────────────── */
+.section { padding: 4.5rem 0; }
+
+.section--dark {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Two-column layout matching the flyer: label left, content right */
+.section-inner {
+  display: grid;
+  grid-template-columns: var(--label-col) 1fr;
+  gap: 0 var(--label-gap);
+  align-items: start;
+}
+
+.section-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  line-height: 1.5;
+  padding-top: 0.25rem;
+  position: sticky;
+  top: 76px;
+}
+
+.section--tldr .section-label { color: var(--blue); }
+.section--dark .section-label  { color: rgba(255, 255, 255, 0.4); }
+
+/* ─── 8. Section content typography ────────────────────────────── */
+.section-content p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.section-content p:last-child { margin-bottom: 0; }
+
+.section--tldr .section-content p {
+  font-size: 1.1rem;
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* Make the key TL;DR callout pop in brand blue */
+.section--tldr .section-content strong { color: var(--blue); }
+
+.section--dark .section-content p      { color: rgba(255, 255, 255, 0.85); }
+.section--dark .section-content strong { color: var(--white); }
+
+/* ─── 9. TL;DR section ──────────────────────────────────────────── */
+.section--tldr { background: #f4f8ff; }
+
+/* ─── 10. Lists ─────────────────────────────────────────────────── */
+.section-content ul {
+  list-style: none;
+  margin-top: 0.75rem;
+}
+
+.section-content ul li {
+  padding: 0.75rem 0 0.75rem 1.75rem;
+  position: relative;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-content ul li:last-child { border-bottom: none; }
+
+.section-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+.section--dark .section-content ul li {
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.section--dark .section-content ul li::before { background: var(--cyan); }
+
+/* Markdown wraps <li> text in <p> — remove the margin */
+.section-content ul li p { margin: 0; }
+
+/* ─── 11. Note block ────────────────────────────────────────────── */
+.note {
+  margin-top: 1.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+.note p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0;
+}
+
+/* ─── 12. FAQ accordion ─────────────────────────────────────────── */
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item:last-child { border-bottom: none; }
+
+.faq-item summary {
+  padding: 1.1rem 0;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text);
+}
+
+/* Hide native disclosure triangle cross-browser */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker              { display: none; }
+
+.faq-item summary::after {
+  content: '+';
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-left: 1rem;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after { content: '\2212'; }
+
+.faq-body {
+  padding: 0 0 1.25rem;
+}
+
+.faq-body p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.faq-body p:last-child { margin-bottom: 0; }
+
+.faq-body ul li {
+  font-size: 1rem;
+  border-bottom: none;
+}
+
+.faq-body ul li::before {
+  top: 0.65rem;
+  background: var(--blue);
+}
+
+/* ─── 13. Footer ────────────────────────────────────────────────── */
+.footer {
+  background: var(--navy);
+  color: var(--white);
+  padding: 4rem 0 0;
+  text-align: center;
+}
+
+/* Cyan stripe — matches the flyer's bottom accent bar */
+.footer::after {
+  content: '';
+  display: block;
+  height: 5px;
+  background: var(--cyan);
+}
+
+.footer-inner { padding: 0 2rem 3.5rem; }
+
+.footer-logo {
+  height: 64px;
+  width: auto;
+  margin-bottom: 1.5rem;
+}
+
+.footer-tagline {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  color: var(--white);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-cta {
+  display: inline-block;
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.85rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.btn-cta:hover { background: var(--blue-dark); }
+
+/* ─── 14. Focus / accessibility ─────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.site-header :focus-visible,
+.footer :focus-visible {
+  outline-color: var(--white);
+}
+
+/* ─── 15. Motion preference ─────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  .nav-links a,
+  .btn-cta,
+  .btn-hero,
+  .nav-links .btn-join { transition: background 0.15s, color 0.15s, opacity 0.15s; }
+}
+
+/* ─── 16. Responsive ────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .nav-toggle-label { display: flex; }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+    padding: 0.25rem 0 1rem;
+  }
+
+  .nav-links li { width: 100%; }
+
+  .nav-links a {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-links .btn-join {
+    display: block;
+    margin-top: 0.75rem;
+    padding: 0.65rem 0;
+    text-align: center;
+    border-radius: 3px;
+    border-bottom: none;
+  }
+
+  .nav:has(.nav-toggle-check:checked) .nav-links { display: flex; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-toggle-label span { transition: transform 0.2s, opacity 0.2s; }
+  }
+
+  .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Stack label above content on small screens */
+  .section-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .section-label {
+    position: static;
+    margin-bottom: 1rem;
+  }
+
+  .section { padding: 3rem 0; }
+
+  .hero { padding: 3.5rem 2rem 3rem; }
+}

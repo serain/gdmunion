@@ -1,0 +1,6 @@
+base_url = "https://serain.github.io/gdmunion"
+title = "GDM Union"
+description = "Google DeepMind employees unionising with UTAW to build AI responsibly to benefit humanity."
+default_language = "en"
+minify_html = false
+generate_feeds = false
