@@ -49,6 +49,8 @@ Because our negotiating position depends on membership size, we need everyone fr
 shape the union. Reach out to your union colleagues if you have questions — we probably had the same ones recently.
 """
 
+faq_intro = "Questions we hear from colleagues, answered honestly."
+
 [[extra.precedents]]
 text = "The University and College Union (UCU) successfully pressured an **£80,000,000 divestment from Israeli bonds** and other assets in 2024 following concerns over international law violations."
 
