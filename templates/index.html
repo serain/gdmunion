@@ -79,11 +79,24 @@
       <h2 class="section-title">Can We Negotiate On This?</h2>
       <div class="section-content">
         {{ section.extra.negotiate_intro | markdown | safe }}
-        <ul>
-          {% for item in section.extra.precedents %}
-          <li>{{ item.text | markdown(inline=true) | safe }}</li>
-          {% endfor %}
-        </ul>
+      </div>
+    </div>
+
+    <div class="precedent-grid">
+      {% for item in section.extra.precedents %}
+      <article class="precedent-card">
+        <div class="precedent-card-bg" style="background-image: url('{{ get_url(path=item.image) }}')"></div>
+        <div class="precedent-card-body">
+          <span class="precedent-card-bar"></span>
+          <h3 class="precedent-card-win">{{ item.headline }}</h3>
+          <p class="precedent-card-text">{{ item.text }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="container">
+      <div class="section-content">
         <div class="note">{{ section.extra.negotiate_note | markdown | safe }}</div>
       </div>
     </div>

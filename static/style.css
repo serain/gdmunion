@@ -404,6 +404,90 @@ body {
   margin-bottom: 0;
 }
 
+/* ─── Precedent cards (the "wins" gallery) ──────────────────────── */
+.precedent-grid {
+  max-width: 1080px;
+  margin: 2.5rem auto 0;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.precedent-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.precedent-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+}
+
+/* navy wash — darkest where the text sits, so any photo stays legible */
+.precedent-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top,
+    rgba(1, 21, 72, 0.96) 0%,
+    rgba(1, 21, 72, 0.78) 38%,
+    rgba(1, 21, 72, 0.30) 72%,
+    rgba(1, 21, 72, 0.08) 100%);
+}
+
+.precedent-card-body {
+  padding: 1.5rem;
+  color: var(--white);
+}
+
+.precedent-card-bar {
+  display: block;
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+  margin-bottom: 0.85rem;
+}
+
+.precedent-card-win {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+  text-wrap: balance;
+}
+
+.precedent-card-text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.precedent-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4); }
+.precedent-card:hover .precedent-card-bg { transform: scale(1.05); }
+
+@media (max-width: 900px) {
+  .precedent-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .precedent-grid { grid-template-columns: 1fr; }
+  .precedent-card { aspect-ratio: 3 / 2; }
+}
+
 /* ─── 12. FAQ accordion ─────────────────────────────────────────── */
 .faq-item {
   border-bottom: 1px solid var(--border);
@@ -555,6 +639,9 @@ body {
 
   .faq-item summary          { transition: color 0.15s; }
   .faq-item summary::after   { transition: transform 0.2s ease, color 0.15s; }
+
+  .precedent-card            { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .precedent-card-bg         { transition: transform 0.4s ease; }
 }
 
 /* ─── 16. Responsive ────────────────────────────────────────────── */

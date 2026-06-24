@@ -52,22 +52,34 @@ shape the union. Reach out to your union colleagues if you have questions — we
 faq_intro = "Questions we hear from colleagues, answered honestly."
 
 [[extra.precedents]]
-text = "The University and College Union (UCU) successfully pressured an **£80,000,000 divestment from Israeli bonds** and other assets in 2024 following concerns over international law violations."
+headline = "£80M pulled from Israeli bonds"
+text = "UK university staff pressured the country's largest pension fund to divest £80,000,000 from Israeli bonds and other assets over international-law violations. (2024)"
+image = "precedents/divestment.jpg"
 
 [[extra.precedents]]
-text = "Telecoms workers in Britain took action to **stop all telephone calls between the UK and apartheid-era South Africa**."
+headline = "Phone lines to apartheid South Africa cut"
+text = "British telecom workers refused to connect calls between the UK and apartheid-era South Africa."
+image = "precedents/apartheid.jpg"
 
 [[extra.precedents]]
-text = "In January 2026, UK actors union Equity negotiated a contract **legally enshrining protections over AI replicas of actors**."
+headline = "Legal protection from AI replicas"
+text = "Actors won a contract legally enshrining protections over AI replicas of their likeness. (2026)"
+image = "precedents/ai-performers.jpg"
 
 [[extra.precedents]]
-text = "Aerospace workers at Rolls-Royce's Scotland factories **voted to stop servicing jet engines used by Pinochet's military dictatorship** following the coup in Chile."
+headline = "Pinochet's warplanes left unserviced"
+text = "Aerospace workers in Scotland refused to service jet engines used by Pinochet's dictatorship after the coup in Chile."
+image = "precedents/arms.jpg"
 
 [[extra.precedents]]
-text = "The International Longshoremen's Association (ILA) used a 2024 port strike to **completely ban automated cranes and driverless vehicles** to protect workers from AI-led redundancies until 2030."
+headline = "Port automation banned to 2030"
+text = "US dockworkers used a 2024 strike to ban automated cranes and driverless vehicles, shielding jobs from AI-led redundancy."
+image = "precedents/ports.jpg"
 
 [[extra.precedents]]
-text = "Video game performers with SAG-AFTRA went on strike at major gaming studios in 2024 to ensure **studios cannot replicate human voices or likenesses without consent and compensation**."
+headline = "No AI cloning without consent"
+text = "Video-game performers struck major studios in 2024 to stop AI replicating voices and likenesses without consent or pay."
+image = "precedents/games.jpg"
 
 [[extra.faqs]]
 question = "What does statutory recognition mean for union members?"
