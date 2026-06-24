@@ -106,7 +106,23 @@ body {
   letter-spacing: 0.02em;
 }
 
+/* Cyan underline accent on hover (skips the Join button) */
+.nav-links a:not(.btn-join) { position: relative; }
+
+.nav-links a:not(.btn-join)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
 .nav-links a:hover { color: var(--white); }
+.nav-links a:not(.btn-join):hover::after { transform: scaleX(1); }
 
 .nav-links .btn-join {
   background: var(--blue);
@@ -281,6 +297,32 @@ body {
 
 .section--dark .section-content p      { color: rgba(255, 255, 255, 0.85); }
 .section--dark .section-content strong { color: var(--white); }
+
+/* Content links — cyan-accented underline (blue on light, cyan on dark) */
+.section-content a,
+.faq-body a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: var(--cyan);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.section-content a:hover,
+.faq-body a:hover {
+  color: var(--blue-dark);
+  text-decoration-color: var(--blue-dark);
+}
+
+.section--dark .section-content a {
+  color: var(--cyan);
+  text-decoration-color: rgba(41, 182, 246, 0.5);
+}
+
+.section--dark .section-content a:hover {
+  color: var(--white);
+  text-decoration-color: var(--white);
+}
 
 /* ─── 9. TL;DR section ──────────────────────────────────────────── */
 .section--tldr { background: #f4f8ff; }
@@ -465,6 +507,8 @@ body {
   .btn-cta,
   .btn-hero,
   .nav-links .btn-join { transition: background 0.15s, color 0.15s, opacity 0.15s; }
+
+  .nav-links a:not(.btn-join)::after { transition: transform 0.2s ease; }
 }
 
 /* ─── 16. Responsive ────────────────────────────────────────────── */
