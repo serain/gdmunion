@@ -120,6 +120,10 @@ at townhalls — have also been tried and ignored.
 [[extra.faqs]]
 question = "What is \"union busting\"?"
 answer = """
+Let's ask Gemini!
+
+![Gemini's response to "what is union busting?", listing common union-busting tactics](gemini-unionbusting.png)
+
 The best way to counteract union busting:
 
 - **Resist intimidation** by knowing your rights and UK law. Union activity is well protected in the UK.

@@ -456,6 +456,15 @@ body {
 
 .faq-body p:last-child { margin-bottom: 0; }
 
+.faq-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
 .faq-body ul li {
   font-size: 1rem;
   border-bottom: none;
