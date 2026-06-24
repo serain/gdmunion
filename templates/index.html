@@ -9,7 +9,8 @@
   <meta property="og:description" content="{{ config.description }}">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="{{ config.base_url }}">
-  <link rel="icon" type="image/png" href="{{ get_url(path='utaw-logo-bw.png') }}">
+  <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
+  <link rel="icon" type="image/png" href="{{ get_url(path='favicon-32.png') }}" sizes="32x32">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -82,8 +83,9 @@
       </div>
     </div>
 
+    {% set precedents = load_data(path="data/precedents.toml") %}
     <div class="precedent-grid">
-      {% for item in section.extra.precedents %}
+      {% for item in precedents.precedent %}
       <article class="precedent-card">
         <div class="precedent-card-bg" style="background-image: url('{{ get_url(path=item.image) }}')"></div>
         <div class="precedent-card-body">
@@ -107,7 +109,8 @@
       <h2 class="section-title">FAQ</h2>
       <p class="section-intro">{{ section.extra.faq_intro }}</p>
       <div class="section-content">
-        {% for item in section.extra.faqs %}
+        {% set faqs = load_data(path="data/faqs.toml") %}
+        {% for item in faqs.faq %}
         <details class="faq-item">
           <summary>{{ item.question }}</summary>
           <div class="faq-body">{{ item.answer | markdown | safe }}</div>

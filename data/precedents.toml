@@ -1,0 +1,32 @@
+# Precedent cards shown in the "Can We Negotiate On This?" section.
+# Add a card by copying a [[precedent]] block. Images live in static/precedents/.
+
+[[precedent]]
+headline = "£80M pulled from Israeli bonds"
+text = "UK university staff pressured the country's largest pension fund to divest £80,000,000 from Israeli bonds and other assets over international-law violations. (2024)"
+image = "precedents/divestment.jpg"
+
+[[precedent]]
+headline = "Phone lines to apartheid South Africa cut"
+text = "British telecom workers refused to connect calls between the UK and apartheid-era South Africa."
+image = "precedents/apartheid.jpg"
+
+[[precedent]]
+headline = "Legal protection from AI replicas"
+text = "Actors won a contract legally enshrining protections over AI replicas of their likeness. (2026)"
+image = "precedents/ai-performers.jpg"
+
+[[precedent]]
+headline = "Pinochet's warplanes left unserviced"
+text = "Aerospace workers in Scotland refused to service jet engines used by Pinochet's dictatorship after the coup in Chile."
+image = "precedents/arms.jpg"
+
+[[precedent]]
+headline = "Port automation banned to 2030"
+text = "US dockworkers used a 2024 strike to ban automated cranes and driverless vehicles, shielding jobs from AI-led redundancy."
+image = "precedents/ports.jpg"
+
+[[precedent]]
+headline = "No AI cloning without consent"
+text = "Video-game performers struck major studios in 2024 to stop AI replicating voices and likenesses without consent or pay."
+image = "precedents/games.jpg"

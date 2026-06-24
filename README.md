@@ -1,16 +1,25 @@
 # GDM Union website
 
-Live at: https://serain.github.io/gdmunion/
+Live at: https://www.gdmunion.co.uk
 
-## Editing content
+A one-page [Zola](https://www.getzola.org/) site. Most edits are text-only and need no tooling.
 
-All page content lives in [`content/_index.md`](content/_index.md), in the front matter block between the `+++` markers at the top of the file. The body below the closing `+++` is not used.
+## Where the content lives
 
-Text fields support Markdown formatting: `**bold**`, `*italic*`, links, etc.
+| What | File |
+|------|------|
+| Page copy (hero, TL;DR, section text, footer) | [`content/_index.md`](content/_index.md) — front matter between the `+++` markers |
+| The "wins" cards | [`data/precedents.toml`](data/precedents.toml) |
+| FAQ entries | [`data/faqs.toml`](data/faqs.toml) |
+| Images | [`static/`](static/) (card photos live in `static/precedents/`) |
 
-### Updating existing text
+Text fields support Markdown: `**bold**`, `*italic*`, `[links](https://example.com)`, etc.
 
-Find the field and change it:
+## Common edits
+
+### Change page copy
+
+Open [`content/_index.md`](content/_index.md) and edit the field:
 
 ```toml
 tldr = """
@@ -18,26 +27,26 @@ Your updated text here. **This will be bold.**
 """
 ```
 
-### Adding a historical precedent
+### Add a "win" card
 
-Copy and paste a new block at the end of the precedents list:
+Add a block to [`data/precedents.toml`](data/precedents.toml):
 
 ```toml
-[[extra.precedents]]
-text = "Description of what the union achieved, with **bold** for emphasis."
+[[precedent]]
+headline = "Short, punchy win"
+text = "One sentence of context."
+image = "precedents/your-image.jpg"   # put the file in static/precedents/
 ```
 
-### Adding a FAQ
+### Add a FAQ
 
-Copy and paste a new block at the end of the FAQ list:
+Add a block to [`data/faqs.toml`](data/faqs.toml):
 
 ```toml
-[[extra.faqs]]
+[[faq]]
 question = "Your question here?"
 answer = """
-Your answer here. Can span multiple paragraphs.
-
-Second paragraph.
+Your answer. Can span multiple paragraphs and use Markdown.
 """
 ```
 
@@ -49,17 +58,17 @@ zola serve
 
 Opens at http://127.0.0.1:1111 with live reload. Requires [Zola](https://www.getzola.org/documentation/getting-started/installation/) (`brew install zola` on Mac).
 
-You don't need Zola just to edit content — GitHub Actions builds the site automatically when your PR is merged.
+If you edit a file under `data/` and don't see it hot-reload, restart `zola serve` — the deploy always picks it up. You don't need Zola at all just to edit content; GitHub Actions builds the site when your PR is merged.
 
 ## Publishing a change
 
 ```bash
 git checkout -b my-change
-# edit content/_index.md
-git add content/_index.md
+# edit the relevant file(s)
+git add -A
 git commit -m "describe your change"
 git push origin my-change
-# → open PR on GitHub, get it reviewed and merged
+# → open a PR on GitHub, get it reviewed and merged
 ```
 
-Merging to `main` triggers GitHub Actions which builds and deploys automatically.
+Merging to `main` triggers GitHub Actions, which builds and deploys automatically.
