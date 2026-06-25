@@ -4,20 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ config.title }}</title>
-  <meta name="description" content="{{ config.description }}">
-  <meta property="og:title"       content="{{ config.title }}">
-  <meta property="og:description" content="{{ config.description }}">
-  <meta property="og:type"        content="website">
-  <meta property="og:url"         content="{{ config.base_url }}">
-  <meta property="og:site_name"   content="GDM Union">
-  <meta property="og:locale"      content="en_GB">
-  <meta property="og:image"       content="{{ get_url(path='og-image.png') }}">
+  <meta name="description"         content="{{ config.description }}">
+
+  <meta property="og:site_name"    content="{{ config.title }}">
+  <meta property="og:type"         content="website">
+  <meta property="og:url"          content="{{ config.base_url }}">
+  <meta property="og:locale"       content="en_GB">
+  <meta property="og:title"        content="GDM Union — DeepMind Employees are Unionising">
+  <meta property="og:description"  content="{{ config.description }}">
+  <meta property="og:image"        content="{{ get_url(path='og-image.png') }}">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt"   content="GDM Union — DeepMind employees are unionising with UTAW">
+  <meta property="og:image:alt"    content="DeepMind Employees are Unionising — Union Recognition Campaign with UTAW">
+
   <meta name="twitter:card"        content="summary_large_image">
-  <meta name="twitter:title"       content="...">
-  <meta name="twitter:description" content="...">
+  <meta name="twitter:title"       content="GDM Union — DeepMind Employees are Unionising">
+  <meta name="twitter:description" content="{{ config.description }}">
   <meta name="twitter:image"       content="{{ get_url(path='og-image.png') }}">
   <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
   <link rel="icon" type="image/png" href="{{ get_url(path='favicon-32.png') }}" sizes="32x32">
