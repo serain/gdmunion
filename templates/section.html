@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ config.title }}</title>
+  <meta name="description"         content="{{ config.description }}">
+
+  <meta property="og:site_name"    content="{{ config.title }}">
+  <meta property="og:type"         content="website">
+  <meta property="og:url"          content="{{ config.base_url }}">
+  <meta property="og:locale"       content="en_GB">
+  <meta property="og:title"        content="GDM Union — DeepMind Employees are Unionising">
+  <meta property="og:description"  content="{{ config.description }}">
+  <meta property="og:image"        content="{{ get_url(path='og-image.png') }}">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="DeepMind Employees are Unionising — Union Recognition Campaign with UTAW">
+
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="GDM Union — DeepMind Employees are Unionising">
+  <meta name="twitter:description" content="{{ config.description }}">
+  <meta name="twitter:image"       content="{{ get_url(path='og-image.png') }}">
+  <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
+  <link rel="icon" type="image/png" href="{{ get_url(path='favicon-32.png') }}" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="nav-logo">
+
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-check" aria-hidden="true">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#who-we-are">Who We Are</a></li>
+        <li><a href="#what-happened">What Happened</a></li>
+        <li><a href="#negotiate">Can We Negotiate?</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="{{ section.extra.join_url }}" class="btn-join" rel="noopener noreferrer">Join</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <p class="hero-eyebrow">{{ section.extra.hero_eyebrow }}</p>
+      <h1>{{ section.extra.hero_title }}</h1>
+      <p class="tagline">{{ section.extra.hero_tagline }}</p>
+      <div class="hero-actions">
+        <a href="{{ section.extra.join_url }}" class="btn-hero" rel="noopener noreferrer">Join UTAW &rarr;</a>
+        <p class="hero-reason">{{ section.extra.hero_reason }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tldr">
+    <div class="container">
+      <h2 class="section-title">TL;DR</h2>
+      <div class="section-content">
+        <p class="tldr-lead">{{ section.extra.tldr_lead | markdown(inline=true) | safe }}</p>
+        {{ section.extra.tldr | markdown | safe }}
+      </div>
+    </div>
+  </section>
+
+  <section id="who-we-are" class="section section--dark">
+    <div class="container">
+      <h2 class="section-title">Who We Are</h2>
+      <div class="section-content">{{ section.extra.who_we_are | markdown | safe }}</div>
+    </div>
+  </section>
+
+  <section id="what-happened" class="section">
+    <div class="container">
+      <h2 class="section-title">What Happened</h2>
+      <div class="section-content">{{ section.extra.what_happened | markdown | safe }}</div>
+    </div>
+  </section>
+
+  <section id="negotiate" class="section section--dark">
+    <div class="container">
+      <h2 class="section-title">Can We Negotiate On This?</h2>
+      <div class="section-content">
+        {{ section.extra.negotiate_intro | markdown | safe }}
+      </div>
+    </div>
+
+    {% set precedents = load_data(path="data/precedents.toml") %}
+    <div class="precedent-grid">
+      {% for item in precedents.precedent %}
+      <article class="precedent-card">
+        <div class="precedent-card-bg" style="background-image: url('{{ get_url(path=item.image) }}')"></div>
+        <div class="precedent-card-body">
+          <span class="precedent-card-bar"></span>
+          <h3 class="precedent-card-win">{{ item.headline }}</h3>
+          <p class="precedent-card-text">{{ item.text }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <div class="container">
+      <div class="section-content">
+        <div class="note">{{ section.extra.negotiate_note | markdown | safe }}</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <div class="container">
+      <h2 class="section-title">FAQ</h2>
+      <p class="section-intro">{{ section.extra.faq_intro }}</p>
+      <div class="section-content">
+        {% set faqs = load_data(path="data/faqs.toml") %}
+        {% for item in faqs.faq %}
+        <details class="faq-item">
+          <summary>{{ item.question }}</summary>
+          <div class="faq-body">{{ item.answer | markdown | safe }}</div>
+        </details>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="footer-logo">
+      <p class="footer-tagline">{{ section.extra.footer_tagline | markdown(inline=true) | safe }}</p>
+      <a href="{{ section.extra.join_url }}" class="btn-cta" rel="noopener noreferrer">Join UTAW</a>
+    </div>
+  </footer>
+
+</body>
+</html>
