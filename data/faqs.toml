@@ -97,7 +97,7 @@ question = "What is \"union busting\"?"
 answer = """
 Let's ask Gemini!
 
-![Gemini's response to "what is union busting?", listing common union-busting tactics](gemini-unionbusting.png)
+![Gemini's response to "what is union busting?", listing common union-busting tactics](/gemini-unionbusting.png)
 
 The best way to counteract union busting:
 
