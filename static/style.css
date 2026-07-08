@@ -197,12 +197,22 @@ body {
 }
 
 .hero .tagline {
-  font-size: clamp(1.2rem, 2.6vw, 1.55rem);
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
   font-weight: 500;
   line-height: 1.5;
-  color: var(--white);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 560px;
   margin-bottom: 2.5rem;
+}
+
+.hero-quote {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: clamp(1.3rem, 2.8vw, 1.65rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--white);
+  text-wrap: balance;
 }
 
 .hero-actions {
@@ -285,6 +295,29 @@ body {
 }
 
 .section--dark .section-intro { color: rgba(255, 255, 255, 0.75); }
+
+/* Sub-heading inside a section (e.g. "What Next?" within "The Story So Far") */
+.section-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  color: var(--blue);
+  margin: 2.25rem 0 0.75rem;
+}
+
+.section-subtitle::before {
+  content: '';
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+  flex-shrink: 0;
+}
+
+.section--dark .section-subtitle { color: var(--white); }
 
 /* ─── 8. Section content typography ────────────────────────────── */
 .section-content {
@@ -404,7 +437,7 @@ body {
   margin-bottom: 0;
 }
 
-/* ─── Precedent cards (the "wins" gallery) ──────────────────────── */
+/* ─── Precedent cards (the "wins" gallery, flip-to-reveal) ──────── */
 .precedent-grid {
   max-width: 1080px;
   margin: 2.5rem auto 0;
@@ -414,28 +447,85 @@ body {
   gap: 1.25rem;
 }
 
+/* Checkbox drives the "pinned" flip state (tap/click/keyboard).
+   Kept in the accessibility tree and focusable — just visually hidden. */
+.flip-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .precedent-card {
-  position: relative;
+  display: block;
   aspect-ratio: 4 / 5;
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
+  -webkit-perspective: 1400px;
+  perspective: 1400px;
+}
+
+.flip-toggle:focus-visible + .precedent-card {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.precedent-card-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.precedent-card:hover .precedent-card-inner,
+.flip-toggle:checked + .precedent-card .precedent-card-inner {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.precedent-card-face {
+  position: absolute;
+  inset: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  isolation: isolate;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  /* backface-visibility mis-renders on some engines when the parent AND
+     this face both carry a rotateY() — so face swapping is driven purely by
+     visibility instead, delayed to match the rotation's transition length. */
+  transition: visibility 0s linear 0.5s;
 }
 
-.precedent-card-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+.precedent-card-front { visibility: visible; }
+.precedent-card-back { visibility: hidden; }
+
+.precedent-card:hover .precedent-card-front,
+.flip-toggle:checked + .precedent-card .precedent-card-front {
+  visibility: hidden;
+}
+
+.precedent-card:hover .precedent-card-back,
+.flip-toggle:checked + .precedent-card .precedent-card-back {
+  visibility: visible;
+}
+
+.precedent-card-front {
   background-size: cover;
   background-position: center;
+  z-index: 0;
 }
 
 /* navy wash — darkest where the text sits, so any photo stays legible */
-.precedent-card::after {
+.precedent-card-front::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -447,7 +537,15 @@ body {
     rgba(1, 21, 72, 0.08) 100%);
 }
 
+.precedent-card-back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  background: var(--blue-dark);
+  justify-content: center;
+}
+
 .precedent-card-body {
+  display: block;
   padding: 1.5rem;
   color: var(--white);
 }
@@ -462,6 +560,7 @@ body {
 }
 
 .precedent-card-win {
+  display: block;
   font-size: 1.2rem;
   font-weight: 800;
   line-height: 1.2;
@@ -471,13 +570,23 @@ body {
 }
 
 .precedent-card-text {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.85);
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.precedent-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4); }
-.precedent-card:hover .precedent-card-bg { transform: scale(1.05); }
+.precedent-card-hint {
+  display: block;
+  margin-top: 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.precedent-card:hover .precedent-card-inner { filter: drop-shadow(0 14px 34px rgba(0, 0, 0, 0.4)); }
 
 @media (max-width: 900px) {
   .precedent-grid { grid-template-columns: repeat(2, 1fr); }
@@ -486,6 +595,79 @@ body {
 @media (max-width: 560px) {
   .precedent-grid { grid-template-columns: 1fr; }
   .precedent-card { aspect-ratio: 3 / 2; }
+}
+
+/* ─── What's New carousel (placeholder — swap for a real component) ─ */
+.updates-carousel-wrap {
+  position: relative;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Fades the right edge to hint there's more to scroll to */
+.updates-carousel-fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0.5rem;
+  width: 4rem;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, var(--white) 85%);
+}
+
+.updates-carousel {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 0.5rem;
+  margin: 0 -0.25rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.update-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1.5px dashed var(--border);
+  background: #f4f8ff;
+}
+
+.update-card-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: rgba(21, 101, 192, 0.1);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+
+.update-card-headline {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  text-wrap: balance;
+}
+
+.update-card-text {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.update-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(1, 21, 72, 0.1); }
+
+@media (max-width: 560px) {
+  .update-card { flex-basis: 240px; }
 }
 
 /* ─── 12. FAQ accordion ─────────────────────────────────────────── */
@@ -640,8 +822,8 @@ body {
   .faq-item summary          { transition: color 0.15s; }
   .faq-item summary::after   { transition: transform 0.2s ease, color 0.15s; }
 
-  .precedent-card            { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-  .precedent-card-bg         { transition: transform 0.4s ease; }
+  .precedent-card-inner      { transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1); }
+  .update-card                { transition: transform 0.2s ease, box-shadow 0.2s ease; }
 }
 
 /* ─── 16. Responsive ────────────────────────────────────────────── */

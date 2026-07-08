@@ -42,9 +42,10 @@
       </label>
 
       <ul class="nav-links" role="list">
+        <li><a href="#whats-new">What's New</a></li>
         <li><a href="#who-we-are">Who We Are</a></li>
-        <li><a href="#what-happened">What Happened</a></li>
-        <li><a href="#negotiate">Can We Negotiate?</a></li>
+        <li><a href="#story-so-far">The Story So Far</a></li>
+        <li><a href="#negotiate">Negotiation Powers</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="{{ section.extra.join_url }}" class="btn-join" rel="noopener noreferrer">Join</a></li>
       </ul>
@@ -55,9 +56,12 @@
     <div class="container">
       <p class="hero-eyebrow">{{ section.extra.hero_eyebrow }}</p>
       <h1>{{ section.extra.hero_title }}</h1>
-      <p class="tagline">{{ section.extra.hero_tagline }}</p>
+      <p class="tagline">
+        {{ section.extra.hero_mission_label }}
+        <span class="hero-quote">&ldquo;{{ section.extra.hero_mission_quote }}&rdquo;</span>
+      </p>
       <div class="hero-actions">
-        <a href="{{ section.extra.join_url }}" class="btn-hero" rel="noopener noreferrer">Join UTAW &rarr;</a>
+        <a href="{{ section.extra.join_url }}" class="btn-hero" rel="noopener noreferrer">{{ section.extra.hero_cta_label }} &rarr;</a>
         <p class="hero-reason">{{ section.extra.hero_reason }}</p>
       </div>
     </div>
@@ -73,6 +77,27 @@
     </div>
   </section>
 
+  <section id="whats-new" class="section">
+    <div class="container">
+      <h2 class="section-title">What's New?</h2>
+      <p class="section-intro">{{ section.extra.whats_new_intro }}</p>
+    </div>
+
+    {% set updates = load_data(path="data/updates.toml") %}
+    <div class="updates-carousel-wrap">
+      <div class="updates-carousel">
+        {% for item in updates.update %}
+        <article class="update-card">
+          <span class="update-card-tag">{{ item.tag }}</span>
+          <h3 class="update-card-headline">{{ item.headline }}</h3>
+          <p class="update-card-text">{{ item.text }}</p>
+        </article>
+        {% endfor %}
+      </div>
+      <div class="updates-carousel-fade" aria-hidden="true"></div>
+    </div>
+  </section>
+
   <section id="who-we-are" class="section section--dark">
     <div class="container">
       <h2 class="section-title">Who We Are</h2>
@@ -80,16 +105,20 @@
     </div>
   </section>
 
-  <section id="what-happened" class="section">
+  <section id="story-so-far" class="section">
     <div class="container">
-      <h2 class="section-title">What Happened</h2>
-      <div class="section-content">{{ section.extra.what_happened | markdown | safe }}</div>
+      <h2 class="section-title">The Story So Far</h2>
+      <div class="section-content">
+        {{ section.extra.story_intro | markdown | safe }}
+        <h3 class="section-subtitle">What Next?</h3>
+        {{ section.extra.story_next | markdown | safe }}
+      </div>
     </div>
   </section>
 
   <section id="negotiate" class="section section--dark">
     <div class="container">
-      <h2 class="section-title">Can We Negotiate On This?</h2>
+      <h2 class="section-title">What Negotiation Powers Do We Have?</h2>
       <div class="section-content">
         {{ section.extra.negotiate_intro | markdown | safe }}
       </div>
@@ -98,14 +127,24 @@
     {% set precedents = load_data(path="data/precedents.toml") %}
     <div class="precedent-grid">
       {% for item in precedents.precedent %}
-      <article class="precedent-card">
-        <div class="precedent-card-bg" style="background-image: url('{{ get_url(path=item.image) }}')"></div>
-        <div class="precedent-card-body">
-          <span class="precedent-card-bar"></span>
-          <h3 class="precedent-card-win">{{ item.headline }}</h3>
-          <p class="precedent-card-text">{{ item.text }}</p>
-        </div>
-      </article>
+      <input type="checkbox" id="flip-{{ loop.index }}" class="flip-toggle" aria-label="Show details for {{ item.headline }}">
+      <label for="flip-{{ loop.index }}" class="precedent-card">
+        <span class="precedent-card-inner">
+          <span class="precedent-card-face precedent-card-front" style="background-image: url('{{ get_url(path=item.image) }}')">
+            <span class="precedent-card-body">
+              <span class="precedent-card-bar"></span>
+              <span class="precedent-card-win">{{ item.headline }}</span>
+              <span class="precedent-card-hint">Read more &rarr;</span>
+            </span>
+          </span>
+          <span class="precedent-card-face precedent-card-back">
+            <span class="precedent-card-body">
+              <span class="precedent-card-bar"></span>
+              <span class="precedent-card-text">{{ item.text }}</span>
+            </span>
+          </span>
+        </span>
+      </label>
       {% endfor %}
     </div>
 

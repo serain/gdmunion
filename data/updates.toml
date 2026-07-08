@@ -1,0 +1,18 @@
+# Placeholder cards for the "What's New" carousel on the homepage.
+# Swap these for real campaign updates / news items whenever the carousel is wired up.
+# Add a card by copying an [[update]] block.
+
+[[update]]
+tag = "Campaign"
+headline = "Weekly update newsletter"
+text = "Coming soon — a landing-page version of our weekly update, right here."
+
+[[update]]
+tag = "Events"
+headline = "Upcoming events"
+text = "Coming soon — meetups, town halls and briefings for GDM union members."
+
+[[update]]
+tag = "In the news"
+headline = "Tech union coverage"
+text = "Coming soon — a roundup of what's happening across the wider tech union movement."
