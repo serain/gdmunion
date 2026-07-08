@@ -697,7 +697,7 @@ body {
 }
 
 .faq-body ul li::before {
-  top: 0.65rem;
+  top: 1.15rem;
   background: var(--blue);
 }
 
