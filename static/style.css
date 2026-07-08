@@ -447,37 +447,27 @@ body {
   gap: 1.25rem;
 }
 
-/* Checkbox drives the flip state (tap/click/keyboard).
-   Kept in the accessibility tree and focusable — just visually hidden. */
-.flip-toggle {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 .precedent-card {
   display: block;
   aspect-ratio: 4 / 5;
   cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  -webkit-perspective: 1200px;
   perspective: 1200px;
 }
 
-.flip-toggle:focus-visible + .precedent-card {
+.precedent-card:focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 4px;
-  border-radius: 12px;
 }
 
 .precedent-card-inner {
   position: relative;
   display: block;
   height: 100%;
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   /* NOTE: never put `filter` (or anything else that creates a containing
      block) on this element — it flattens the 3D context and breaks
@@ -485,7 +475,8 @@ body {
 }
 
 .precedent-card:hover .precedent-card-inner,
-.flip-toggle:checked + .precedent-card .precedent-card-inner {
+.precedent-card:focus-visible .precedent-card-inner {
+  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 
@@ -495,11 +486,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  border-radius: 10px;
-  overflow: hidden;
+  -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
 
 .precedent-card-front {
@@ -520,6 +508,7 @@ body {
 }
 
 .precedent-card-back {
+  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   background: var(--blue-dark);
   justify-content: center;
@@ -557,16 +546,6 @@ body {
   font-size: 0.9rem;
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.9);
-}
-
-.precedent-card-hint {
-  display: block;
-  margin-top: 0.85rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--cyan);
 }
 
 @media (max-width: 900px) {

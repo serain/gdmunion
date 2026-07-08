@@ -126,14 +126,12 @@
     {% set precedents = load_data(path="data/precedents.toml") %}
     <div class="precedent-grid">
       {% for item in precedents.precedent %}
-      <input type="checkbox" id="flip-{{ loop.index }}" class="flip-toggle" aria-label="Show details for {{ item.headline }}">
-      <label for="flip-{{ loop.index }}" class="precedent-card">
+      <div class="precedent-card" tabindex="0" aria-label="{{ item.headline }}. {{ item.text }}">
         <span class="precedent-card-inner">
           <span class="precedent-card-face precedent-card-front" style="background-image: url('{{ get_url(path=item.image) }}')">
             <span class="precedent-card-body">
               <span class="precedent-card-bar"></span>
               <span class="precedent-card-win">{{ item.headline }}</span>
-              <span class="precedent-card-hint">Read more &rarr;</span>
             </span>
           </span>
           <span class="precedent-card-face precedent-card-back">
@@ -143,7 +141,7 @@
             </span>
           </span>
         </span>
-      </label>
+      </div>
       {% endfor %}
     </div>
   </section>
