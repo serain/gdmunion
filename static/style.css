@@ -447,7 +447,7 @@ body {
   gap: 1.25rem;
 }
 
-/* Checkbox drives the "pinned" flip state (tap/click/keyboard).
+/* Checkbox drives the flip state (tap/click/keyboard).
    Kept in the accessibility tree and focusable — just visually hidden. */
 .flip-toggle {
   position: absolute;
@@ -464,11 +464,8 @@ body {
 .precedent-card {
   display: block;
   aspect-ratio: 4 / 5;
-  border-radius: 10px;
-  overflow: hidden;
   cursor: pointer;
-  -webkit-perspective: 1400px;
-  perspective: 1400px;
+  perspective: 1200px;
 }
 
 .flip-toggle:focus-visible + .precedent-card {
@@ -480,15 +477,15 @@ body {
 .precedent-card-inner {
   position: relative;
   display: block;
-  width: 100%;
   height: 100%;
-  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
+  /* NOTE: never put `filter` (or anything else that creates a containing
+     block) on this element — it flattens the 3D context and breaks
+     backface-visibility on the faces. */
 }
 
 .precedent-card:hover .precedent-card-inner,
 .flip-toggle:checked + .precedent-card .precedent-card-inner {
-  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 
@@ -498,30 +495,16 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  border-radius: 10px;
+  overflow: hidden;
+  backface-visibility: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  /* backface-visibility mis-renders on some engines when the parent AND
-     this face both carry a rotateY() — so face swapping is driven purely by
-     visibility instead, delayed to match the rotation's transition length. */
-  transition: visibility 0s linear 0.5s;
-}
-
-.precedent-card-front { visibility: visible; }
-.precedent-card-back { visibility: hidden; }
-
-.precedent-card:hover .precedent-card-front,
-.flip-toggle:checked + .precedent-card .precedent-card-front {
-  visibility: hidden;
-}
-
-.precedent-card:hover .precedent-card-back,
-.flip-toggle:checked + .precedent-card .precedent-card-back {
-  visibility: visible;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
 }
 
 .precedent-card-front {
   background-size: cover;
   background-position: center;
-  z-index: 0;
 }
 
 /* navy wash — darkest where the text sits, so any photo stays legible */
@@ -529,7 +512,6 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: -1;
   background: linear-gradient(to top,
     rgba(1, 21, 72, 0.96) 0%,
     rgba(1, 21, 72, 0.78) 38%,
@@ -538,13 +520,14 @@ body {
 }
 
 .precedent-card-back {
-  -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   background: var(--blue-dark);
   justify-content: center;
 }
 
 .precedent-card-body {
+  position: relative;
+  z-index: 1; /* above the front's gradient overlay */
   display: block;
   padding: 1.5rem;
   color: var(--white);
@@ -585,8 +568,6 @@ body {
   text-transform: uppercase;
   color: var(--cyan);
 }
-
-.precedent-card:hover .precedent-card-inner { filter: drop-shadow(0 14px 34px rgba(0, 0, 0, 0.4)); }
 
 @media (max-width: 900px) {
   .precedent-grid { grid-template-columns: repeat(2, 1fr); }

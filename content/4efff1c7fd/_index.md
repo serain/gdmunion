@@ -85,10 +85,5 @@ precedent for broader negotiations.** Click each card below for more on some enc
 former achievements from comparable unions:
 """
 
-negotiate_note = """
-Because our negotiating position depends on membership size, we need everyone from across GDM to
-shape the union. Reach out to your union colleagues if you have questions — we probably had the same ones recently.
-"""
-
 faq_intro = "Questions we hear from colleagues, answered honestly."
 +++
