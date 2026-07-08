@@ -81,8 +81,7 @@ GDM union members want to include demands over **unethical military contracts**,
 negotiate_intro = """
 The message from Google's leadership is that we can only negotiate pay, holiday and
 hours — the minimum scope guaranteed by law. **There is considerable historical
-precedent for broader negotiations.** Click each card below for more on some encouraging
-former achievements from comparable unions:
+precedent for broader negotiations** from comparable unions:
 """
 
 faq_intro = "Questions we hear from colleagues, answered honestly."
