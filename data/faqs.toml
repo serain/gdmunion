@@ -2,6 +2,49 @@
 # Add one by copying a [[faq]] block. Answers support Markdown.
 
 [[faq]]
+question = "Can I stay anonymous?"
+answer = """
+Yes.
+
+Your employer does not have a legal right to know if you are a member of a trade union. Unions keep
+their membership lists strictly confidential. Under Data Protection (UK GDPR), trade union membership
+is classified as "special category data," meaning it requires the highest level of privacy protection.
+
+If the union pursues statutory recognition through the UK Government's Central Arbitration Committee
+(CAC), the CAC will need to verify the union has sufficient membership within the bargaining unit —
+typically at least 10% of workers. To do this, membership data may need to be submitted to the CAC,
+which is an independent governmental body.
+
+Critically, this data is not shared with Google. The CAC handles it confidentially, and the employer
+only sees the membership percentage.
+
+The law forbids employers from compiling lists of union members — see Blacklisting Regulations 2010,
+Reg. 3.
+"""
+
+[[faq]]
+question = "What legal protection are we entitled to?"
+answer = """
+- **Protection from dismissal for union activity** — Section 152 TULRCA 1992
+- **Protection from detriment** (demotion, pay cut, harassment) for union activity — Section 146 TULRCA 1992
+- **Protection from dismissal for taking part in lawful industrial action** (now automatically unfair, no qualifying period) — Section 238A TULRCA, as amended by Employment Rights Act 2025
+- **Protection from detriment for industrial action** (coming into force October 2026) — Employment Rights Act 2025, s.76 (which inserts s.236A into TULRCA 1992)
+- **Right to paid time off for union reps** to carry out duties — Section 168 TULRCA 1992
+- **Right to unpaid time off for all members** to take part in union activities — Section 170 TULRCA 1992
+- **Individual representation** in disciplinary and grievance hearings — Employment Relations Act 1999, s.10
+- **Legal support through the union** if things go wrong — Union rulebook / membership agreement
+- **Democratic voice** in setting demands and balloting on action — Section 226 TULRCA 1992 (ballot provisions)
+- **Protection from blacklisting** based on union activities — Blacklisting Regulations 2010
+"""
+
+[[faq]]
+question = "Why doesn't Google want us to form a union?"
+answer = """
+Together we can formally act as an employee-side counterweight to management's ability to exercise
+unchecked authority. Management's self-interest is to prevent us from having this kind of power.
+"""
+
+[[faq]]
 question = "What does statutory recognition mean for union members?"
 answer = """
 Statutory recognition gives GDM employees a legal framework to force negotiations on topics we care
@@ -61,11 +104,4 @@ The best way to counteract union busting:
 - **Resist intimidation** by knowing your rights and UK law. Union activity is well protected in the UK.
 - **Diversify your sources** — listen to different narratives and build your own informed opinion. Assume leadership have a bias in their comms about unions.
 - **Talk with your colleagues** — learn about their experience and motivations directly from them.
-"""
-
-[[faq]]
-question = "Why doesn't Google want us to form a union?"
-answer = """
-Together we can formally act as an employee-side counterweight to management's ability to exercise
-unchecked authority. Management's self-interest is to prevent us from having this kind of power.
 """
