@@ -453,7 +453,6 @@ body {
   aspect-ratio: 4 / 5;
   cursor: pointer;
   border-radius: 10px;
-  overflow: hidden;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
   -webkit-perspective: 1200px;
   perspective: 1200px;
@@ -468,6 +467,7 @@ body {
   position: relative;
   display: block;
   height: 100%;
+  border-radius: 10px;
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   /* NOTE: never put `filter` (or anything else that creates a containing
@@ -487,6 +487,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  border-radius: 10px;
+  overflow: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -496,8 +498,9 @@ body {
   background-position: center;
 }
 
-/* navy wash — darkest where the text sits, so any photo stays legible */
-.precedent-card-front::after {
+/* navy wash — darkest where the text sits, so any photo stays legible.
+   A ::before so it paints under the text without needing z-index. */
+.precedent-card-front::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -516,8 +519,6 @@ body {
 }
 
 .precedent-card-body {
-  position: relative;
-  z-index: 1; /* above the front's gradient overlay */
   display: block;
   padding: 1.5rem;
   color: var(--white);
@@ -790,12 +791,13 @@ body {
 }
 
 .why-dot {
-  width: 8px;
-  height: 8px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
   padding: 0;
   border: none;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.4);
+  background: red;
   cursor: pointer;
 }
 
@@ -1144,7 +1146,12 @@ body.page-archive {
 .archive-main { flex: 1 0 auto; }
 .archive-main .section-intro {
   text-align: left;
-  margin-left: 0;
+  max-width: 640px;
+  margin-top: 0;
+  margin-inline: auto;
+  margin-bottom: 2.75rem;
+  font-size: var(--fs-body);
+  line-height: 1.75;
 }
 
 /* A wider column than the prose default so the table can breathe */
