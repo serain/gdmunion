@@ -127,6 +127,7 @@ body {
 .nav-links a:not(.btn-join):hover::after { transform: scaleX(1); }
 
 .nav-links .btn-join {
+  display: inline-block;
   background: var(--blue);
   color: var(--white);
   padding: 0.4rem 1.1rem;
@@ -787,7 +788,13 @@ body {
 }
 
 /* ─── 16. Responsive ────────────────────────────────────────────── */
-@media (max-width: 720px) {
+/* Nav switches to the hamburger menu well before the mobile breakpoint.
+   The full link row (logo + 6 links + Join) only actually fits starting
+   ~955px — below that the row wraps to a second line under the logo,
+   with zero vertical clearance around the Join button. That range covers
+   essentially every tablet in portrait *and* narrow landscape, so we jump
+   straight from mobile to the single-line desktop row with margin to spare. */
+@media (max-width: 1000px) {
   .nav-toggle-label { display: flex; }
 
   .nav-links {
@@ -832,7 +839,9 @@ body {
   .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
+}
 
+@media (max-width: 720px) {
   .section { padding: 3rem 0; }
 
   .section-title { margin-bottom: 1.75rem; }
