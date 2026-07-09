@@ -19,6 +19,20 @@ source = "wired.com"
 summary = "Google DeepMind's initial union recognition talks with the CWU and Unite stalled after senior leadership failed to attend the first Acas-arbitrated meeting, leading employees to allege bad-faith bargaining and union-busting tactics including shutting down internal dissent channels, set against Google's expanding military AI contracts."
 
 [[article]]
+date = "June 25, 2026"
+title = "Trust is not Governance"
+url = "https://www.blackhc.net/essays/trust_is_not_governance/"
+source = "blackhc.net"
+summary = "UTAW member Andreas Kirsch argues DeepMind's safety culture cannot substitute for real governance, citing Google's Pentagon contract as proof that trust in leadership fails when commercial and national-security pressure intervenes."
+
+[[article]]
+date = "June 11, 2026"
+title = "Google Director Resigns, Citing Pentagon AI Deal"
+url = "https://www.businessinsider.com/google-director-resigned-pentagon-ai-deal-military-artificial-intelligence-gemini-2026-6"
+source = "businessinsider.com"
+summary = "Google Android security director René Mayrhofer resigned, writing that management 'lost its moral compass' after signing Pentagon AI contracts he says could enable mass surveillance of EU citizens and violate international law."
+
+[[article]]
 date = "May 22, 2026"
 title = "Google rejects initial union recognition bid and starts talks with Acas"
 url = "https://web.archive.org/web/20260610140027/https://www.personneltoday.com/hr/google-rejects-initial-union-recognition-bid/"
