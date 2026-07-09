@@ -493,22 +493,21 @@ body {
   backface-visibility: hidden;
 }
 
+/* The photo (--card-img, set inline per card) with the navy wash layered
+   over it in a single background — darkest where the text sits, so any
+   photo stays legible. Baking the gradient into the background (rather than
+   a positioned overlay) means the title paints on top with no z-index, and
+   nothing creates a stacking context to flatten the 3D flip. */
 .precedent-card-front {
+  background-image:
+    linear-gradient(to top,
+      rgba(1, 21, 72, 0.96) 0%,
+      rgba(1, 21, 72, 0.78) 38%,
+      rgba(1, 21, 72, 0.30) 72%,
+      rgba(1, 21, 72, 0.08) 100%),
+    var(--card-img);
   background-size: cover;
   background-position: center;
-}
-
-/* navy wash — darkest where the text sits, so any photo stays legible.
-   A ::before so it paints under the text without needing z-index. */
-.precedent-card-front::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top,
-    rgba(1, 21, 72, 0.96) 0%,
-    rgba(1, 21, 72, 0.78) 38%,
-    rgba(1, 21, 72, 0.30) 72%,
-    rgba(1, 21, 72, 0.08) 100%);
 }
 
 .precedent-card-back {

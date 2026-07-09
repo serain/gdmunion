@@ -156,7 +156,7 @@
       {% for item in precedents.precedent %}
       <div class="precedent-card" tabindex="0" aria-label="{{ item.headline }}. {{ item.text }}">
         <span class="precedent-card-inner">
-          <span class="precedent-card-face precedent-card-front" style="background-image: url('{{ get_url(path=item.image) }}')">
+          <span class="precedent-card-face precedent-card-front" style="--card-img: url('{{ get_url(path=item.image) }}')">
             <span class="precedent-card-body">
               <span class="precedent-card-bar"></span>
               <span class="precedent-card-win">{{ item.headline }}</span>
