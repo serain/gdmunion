@@ -1,0 +1,38 @@
+# News-article frames for the "Why We're Doing This" carousel on the homepage.
+# Placeholder copy for now — `summary` is where the short AI-written summary goes.
+# Add a frame by copying an [[article]] block. Images live in static/articles/.
+
+[[article]]
+image = "articles/datacentre.jpg"
+title = "Lorem ipsum dolor sit amet consectetur"
+summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mauris nec justo faucibus dignissim. Sed euismod, nunc vel tincidunt lacinia, nisl nisi aliquet."
+source = "Placeholder Source"
+date = "May 2026"
+
+[[article]]
+image = "articles/drone.jpg"
+title = "Sed do eiusmod tempor incididunt ut labore"
+summary = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit."
+source = "Placeholder Source"
+date = "April 2026"
+
+[[article]]
+image = "articles/surveillance.jpg"
+title = "Ut enim ad minim veniam quis nostrud"
+summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation."
+source = "Placeholder Source"
+date = "March 2026"
+
+[[article]]
+image = "articles/robotics.jpg"
+title = "Quis autem vel eum iure reprehenderit"
+summary = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
+source = "Placeholder Source"
+date = "February 2026"
+
+[[article]]
+image = "articles/protest.jpg"
+title = "Nemo enim ipsam voluptatem quia voluptas"
+summary = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore."
+source = "Placeholder Source"
+date = "January 2026"

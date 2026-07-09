@@ -4,3 +4,11 @@ description = "FTEs across Google DeepMind UK are unionising for a real say over
 default_language = "en"
 minify_html = true
 generate_feeds = false
+
+[extra]
+# Shared across templates (nav, footer). Kept here so there is a single source
+# of truth rather than repeating the value in each page's front matter.
+join_url = "https://utaw.tech/join"
+# Slug of the live content section. The public site is served from this path;
+# templates build internal links from it (see templates/partials/nav.html).
+content_path = "4efff1c7fd"

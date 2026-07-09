@@ -30,27 +30,7 @@
 </head>
 <body>
 
-  <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="nav-logo">
-
-      <input type="checkbox" id="nav-toggle" class="nav-toggle-check" aria-hidden="true">
-      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-
-      <ul class="nav-links" role="list">
-        <li><a href="#whats-new">What's New</a></li>
-        <li><a href="#who-we-are">Who We Are</a></li>
-        <li><a href="#story-so-far">The Story So Far</a></li>
-        <li><a href="#negotiate">Negotiation Powers</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="{{ section.extra.join_url }}" class="btn-join" rel="noopener noreferrer">Join</a></li>
-      </ul>
-    </nav>
-  </header>
+  {% include "partials/nav.html" %}
 
   <section class="hero">
     <div class="container">
@@ -76,24 +56,72 @@
     </div>
   </section>
 
-  <section id="whats-new" class="section">
-    <div class="container">
-      <h2 class="section-title">What's New?</h2>
-      <p class="section-intro">{{ section.extra.whats_new_intro }}</p>
-    </div>
+  {% set articles = load_data(path="data/articles.toml") %}
+  {% set total = articles.article | length %}
+  {% set archive_url = get_url(path="@/" ~ config.extra.content_path ~ "/archive/_index.md") %}
+  <section id="why" class="why">
+    <div class="why-stage" data-carousel role="region" aria-roledescription="carousel"
+         aria-label="Recent news about Google and AI">
 
-    {% set updates = load_data(path="data/updates.toml") %}
-    <div class="updates-carousel-wrap">
-      <div class="updates-carousel">
-        {% for item in updates.update %}
-        <article class="update-card">
-          <span class="update-card-tag">{{ item.tag }}</span>
-          <h3 class="update-card-headline">{{ item.headline }}</h3>
-          <p class="update-card-text">{{ item.text }}</p>
+      {# Rotating photos — decorative background, behind the overlaid text #}
+      <div class="why-track" data-track aria-hidden="true">
+        {% for a in articles.article %}
+        <div class="why-slide{% if loop.first %} is-active{% endif %}" data-slide
+             style="background-image: url('{{ get_url(path=a.image) }}')"></div>
+        {% endfor %}
+      </div>
+      <div class="why-scrim" aria-hidden="true"></div>
+
+      <div class="why-progress" data-progress aria-hidden="true"><span></span></div>
+
+      {# Static context — top-left, stays put across all frames #}
+      <div class="why-static">
+        <span class="why-bar" aria-hidden="true"></span>
+        <h2 class="why-heading">Why We're Doing This</h2>
+        <p class="why-lead">
+          Since quietly dropping its founding AI principles, Google has doubled down on
+          pushing unethical uses of AI. Here are just some of the things they've been up to.
+        </p>
+        <a class="why-archive" href="{{ archive_url }}">
+          More of these in our archive <span class="why-archive-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+
+      {# Article caption — cross-fades in the middle of the bottom band #}
+      <div class="why-captions">
+        {% for a in articles.article %}
+        <article class="why-caption{% if loop.first %} is-active{% endif %}" data-caption
+                 role="group" aria-roledescription="slide"
+                 aria-label="{{ loop.index }} of {{ total }}"
+                 {% if not loop.first %}aria-hidden="true"{% endif %}>
+          <span class="why-slide-tag">AI Summary</span>
+          <h3 class="why-slide-title">{{ a.title }}</h3>
+          <p class="why-slide-text">{{ a.summary }}</p>
+          <p class="why-slide-meta">{{ a.source }} &middot; {{ a.date }}</p>
         </article>
         {% endfor %}
       </div>
-      <div class="updates-carousel-fade" aria-hidden="true"></div>
+
+      {# Controls — far right of the band on desktop, bottom on mobile #}
+      <div class="why-controls">
+        <div class="why-dots" role="tablist" aria-label="Choose a slide">
+          {% for a in articles.article %}
+          <button type="button" class="why-dot{% if loop.first %} is-active{% endif %}"
+                  data-dot data-index="{{ loop.index0 }}" role="tab"
+                  aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+                  aria-label="Show slide {{ loop.index }} of {{ total }}"></button>
+          {% endfor %}
+        </div>
+        <div class="why-arrows">
+          <button type="button" class="why-arrow" data-prev aria-label="Previous slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="why-arrow" data-next aria-label="Next slide">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -162,13 +190,9 @@
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="footer-logo">
-      <p class="footer-tagline">{{ section.extra.footer_tagline | markdown(inline=true) | safe }}</p>
-      <a href="{{ section.extra.join_url }}" class="btn-cta" rel="noopener noreferrer">Join UTAW</a>
-    </div>
-  </footer>
+  {% set footer_tagline = section.extra.footer_tagline %}
+  {% include "partials/footer.html" %}
 
+  <script src="{{ get_url(path='carousel.js') }}" defer></script>
 </body>
 </html>

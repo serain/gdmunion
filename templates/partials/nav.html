@@ -1,0 +1,33 @@
+{# Shared site navigation. Included by every page template.
+
+   Anchor links are resolved against the main content section so they work
+   from sub-pages (e.g. the archive) as well as the home page. Set
+   `nav_current` before including to mark the active top-level page, e.g.
+   `{% set nav_current = "archive" %}`. #}
+{% set home_url    = get_url(path="@/" ~ config.extra.content_path ~ "/_index.md") %}
+{% set archive_url = get_url(path="@/" ~ config.extra.content_path ~ "/archive/_index.md") %}
+
+<header class="site-header">
+  <nav class="nav" aria-label="Main navigation">
+    <a href="{{ home_url }}" class="nav-logo-link" aria-label="GDM Union — home">
+      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="nav-logo">
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-check" aria-hidden="true">
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <ul class="nav-links" role="list">
+      <li><a href="{{ home_url }}#why">Why We're Doing This</a></li>
+      <li><a href="{{ home_url }}#who-we-are">Who We Are</a></li>
+      <li><a href="{{ home_url }}#story-so-far">The Story So Far</a></li>
+      <li><a href="{{ home_url }}#negotiate">Negotiation Powers</a></li>
+      <li><a href="{{ home_url }}#faq">FAQ</a></li>
+      <li><a href="{{ archive_url }}"{% if nav_current is defined and nav_current == "archive" %} class="is-active" aria-current="page"{% endif %}>Archive</a></li>
+      <li><a href="{{ config.extra.join_url }}" class="btn-join" rel="noopener noreferrer">Join</a></li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive &mdash; {{ config.title }}</title>
+  <meta name="description" content="A running archive of press coverage of Google and Google DeepMind's contracts and uses of AI.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="{{ get_url(path='favicon.ico') }}" sizes="any">
+  <link rel="icon" type="image/png" href="{{ get_url(path='favicon-32.png') }}" sizes="32x32">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+</head>
+<body class="page-archive">
+
+  {% set nav_current = "archive" %}
+  {% include "partials/nav.html" %}
+
+  <main class="archive-main">
+    <section class="section">
+      <div class="container container--wide">
+        <h2 class="section-title">Archive</h2>
+        <p class="section-intro">{{ section.extra.intro }}</p>
+
+        {% set articles = load_data(path="data/archive.toml") %}
+        {# Placeholder AI summaries until real ones are written. A row can
+           override this by setting `summary = "..."` in data/archive.toml. #}
+        {% set lorem = [
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mauris nec justo faucibus dignissim, at porttitor nunc.",
+          "Sed euismod, nunc vel tincidunt lacinia, nisl nisi aliquet nunc, sed aliquet nunc nisl eu nunc. Praesent commodo cursus.",
+          "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint.",
+          "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum et dolore."
+        ] %}
+        <div class="archive-table-wrap" tabindex="0" role="region" aria-label="Archive of press coverage (scrollable)">
+          <table class="archive-table">
+            <caption class="visually-hidden">Press coverage of Google and Google DeepMind, newest first.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="col-date">Date</th>
+                <th scope="col" class="col-article">Article</th>
+                <th scope="col" class="col-summary">AI Summary</th>
+                <th scope="col" class="col-source">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for a in articles.article %}
+              <tr>
+                <td class="archive-date">{{ a.date }}</td>
+                <th scope="row" class="archive-title">
+                  {% if a.url %}
+                  <a href="{{ a.url }}" target="_blank" rel="noopener noreferrer">{{ a.title }}<span class="archive-title-arrow" aria-hidden="true"> &#8599;</span></a>
+                  {% else %}
+                  {{ a.title }}
+                  {% endif %}
+                </th>
+                {% set li = loop.index0 % 4 %}
+                <td class="archive-summary">{{ a.summary | default(value=lorem | nth(n=li)) }}</td>
+                <td class="archive-source">{% if a.source %}{{ a.source }}{% else %}&mdash;{% endif %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  {% include "partials/footer.html" %}
+</body>
+</html>

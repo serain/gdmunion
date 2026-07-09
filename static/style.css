@@ -558,77 +558,338 @@ body {
   .precedent-card { aspect-ratio: 3 / 2; }
 }
 
-/* ─── What's New carousel (placeholder — swap for a real component) ─ */
-.updates-carousel-wrap {
+/* ─── "Why We're Doing This" carousel ──────────────────────────────
+   One immersive, full-bleed stage: the news photos rotate as the
+   background while text is overlaid in the corners. A 3-row grid inside
+   the stage keeps the layout collision-proof at any size — the static
+   heading pins to the top, the article caption + controls sit in a bottom
+   bar, and a flexible gap sits between. Photos are absolutely behind the
+   grid; each caption cross-fades in sync with its photo. Progressive
+   enhancement: with no JS the first photo + caption show and the controls
+   stay hidden; carousel.js adds `.is-enhanced` to reveal them and autoplay. */
+.why {
   position: relative;
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  background: var(--navy);
+  overflow: hidden;
+  scroll-margin-top: var(--nav-h);
 }
 
-/* Fades the right edge to hint there's more to scroll to */
-.updates-carousel-fade {
+.why-stage {
+  --why-pad: clamp(1.5rem, 4vw, 3.5rem);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr) auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "space   space    space"
+    "static  caption  controls";
+  align-items: end;
+  column-gap: clamp(1.5rem, 4vw, 3.5rem);
+  min-height: clamp(430px, 56vh, 540px);
+  color: var(--white);
+}
+
+/* Rotating photos — absolutely behind the grid content */
+.why-track { position: absolute; inset: 0; }
+
+.why-slide {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0.5rem;
-  width: 4rem;
-  pointer-events: none;
-  background: linear-gradient(to right, transparent, var(--white) 85%);
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  will-change: transform;
 }
 
-.updates-carousel {
-  display: flex;
-  gap: 1.25rem;
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  padding-bottom: 0.5rem;
-  margin: 0 -0.25rem;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+.why-slide.is-active { opacity: 1; }
+
+/* Vignette — a strong bottom wash carries the whole desktop text band; a
+   lighter top wash covers the progress bar (and the heading once stacked on
+   mobile). The photo stays bright through the middle. */
+.why-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg,   rgba(1, 21, 72, 0.95) 0%, rgba(1, 21, 72, 0.55) 24%, rgba(1, 21, 72, 0.05) 50%),
+    linear-gradient(180deg, rgba(1, 21, 72, 0.6) 0%, transparent 24%);
 }
 
-.update-card {
-  flex: 0 0 280px;
-  scroll-snap-align: start;
-  padding: 1.5rem;
-  border-radius: 10px;
-  border: 1.5px dashed var(--border);
-  background: #f4f8ff;
+/* Static framing — bottom-left on desktop, top on mobile */
+.why-static {
+  grid-area: static;
+  position: relative;
+  z-index: 1;
+  padding: 0 0 var(--why-pad) var(--why-pad);
+  max-width: 42ch;
 }
 
-.update-card-tag {
-  display: inline-block;
+.why-bar {
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+  margin-bottom: 1.35rem;
+}
+
+.why-heading {
+  font-size: clamp(1.4rem, 2.1vw, 1.85rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  margin-bottom: 0.75rem;
+}
+
+.why-lead {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 42ch;
+}
+
+.why-archive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--cyan);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid rgba(41, 182, 246, 0.4);
+}
+
+.why-archive:hover { color: var(--white); border-bottom-color: var(--white); }
+
+/* Article caption — the middle of the bottom band. Captions share one grid
+   cell so they cross-fade in place and the cell reserves the height of the
+   tallest one, so nothing jumps between slides. */
+.why-captions {
+  grid-area: caption;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  padding-bottom: var(--why-pad);
+}
+
+.why-caption {
+  grid-area: 1 / 1;
+  opacity: 0;
+}
+
+.why-caption.is-active { opacity: 1; }
+
+.why-caption:not(.is-active) { pointer-events: none; }
+
+.why-slide-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blue);
-  background: rgba(21, 101, 192, 0.1);
-  padding: 0.25rem 0.6rem;
+  color: var(--cyan);
+  border: 1px solid rgba(41, 182, 246, 0.5);
+  padding: 0.3rem 0.75rem;
   border-radius: 999px;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
 }
 
-.update-card-headline {
-  font-size: 1.05rem;
+.why-slide-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+.why-slide-title {
+  font-size: clamp(1.35rem, 2.3vw, 2rem);
   font-weight: 800;
-  line-height: 1.25;
-  color: var(--text);
-  margin-bottom: 0.5rem;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
   text-wrap: balance;
+  margin-bottom: 0.85rem;
+  max-width: 28ch;
 }
 
-.update-card-text {
-  font-size: 0.9rem;
+.why-slide-text {
+  font-size: var(--fs-lead);
   line-height: 1.55;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 60ch;
 }
 
-.update-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(1, 21, 72, 0.1); }
+.why-slide-meta {
+  margin-top: 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
 
-@media (max-width: 560px) {
-  .update-card { flex-basis: 240px; }
+/* Auto-advance progress bar — spans the full stage width along the top.
+   Doubles as the autoplay clock: carousel.js advances when it finishes. */
+.why-progress {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 6;
+  overflow: hidden;
+}
+
+.why-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--cyan);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.why-stage.is-enhanced.is-playing .why-progress { display: block; }
+
+.why-stage.is-playing .why-progress span {
+  animation: whyProgress var(--why-interval, 7s) linear forwards;
+}
+
+.why-stage.is-paused .why-progress span { animation-play-state: paused; }
+
+@keyframes whyProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Controls — hidden until JS enhances the carousel. Far-right of the bottom
+   band on desktop; a full-width row under the caption on mobile. */
+.why-controls {
+  grid-area: controls;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 var(--why-pad) var(--why-pad) 0;
+}
+
+.why-stage.is-enhanced .why-controls { display: flex; }
+
+.why-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.why-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+}
+
+.why-dot:hover { background: rgba(255, 255, 255, 0.7); }
+
+.why-dot.is-active {
+  width: 24px;
+  background: var(--cyan);
+}
+
+.why-arrows {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.why-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+
+.why-arrow svg { width: 20px; height: 20px; }
+
+.why-arrow:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--navy);
+}
+
+/* Clean seam into the dark "Who We Are" section that follows */
+.why + .section--dark { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .why-slide,
+  .why-caption     { transition: opacity 0.8s ease; }
+  .why-archive-arrow { transition: transform 0.2s ease; }
+  .why-archive:hover .why-archive-arrow { transform: translateX(4px); }
+  .why-dot,
+  .why-arrow       { transition: background 0.15s, border-color 0.15s, color 0.15s, width 0.25s ease; }
+  .why-slide.is-active { animation: whyZoom 9s ease-out forwards; }
+}
+
+/* Subtle Ken Burns drift on the active photo */
+@keyframes whyZoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .why-progress { display: none !important; }
+}
+
+/* Narrow screens: restack the band — framing on top, then the photo, then
+   the caption and controls at the bottom (the order that reads best). */
+@media (max-width: 820px) {
+  .why-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "static"
+      "space"
+      "caption"
+      "controls";
+    align-items: stretch;
+    column-gap: 0;
+    min-height: clamp(520px, 74vh, 600px);
+  }
+
+  .why-static  { padding: var(--why-pad) var(--why-pad) 0; max-width: none; }
+  .why-captions { padding: 1.5rem var(--why-pad) 0; }
+
+  .why-controls {
+    justify-content: space-between;
+    padding: 1.5rem var(--why-pad) var(--why-pad);
+  }
+
+  .why-slide-title { max-width: none; }
+
+  /* Stronger top + bottom washes — the stacked text needs more cover, with
+     a bright band left in the middle for the immersive photo. */
+  .why-scrim {
+    background:
+      linear-gradient(180deg, rgba(1, 21, 72, 0.92) 0%, rgba(1, 21, 72, 0.45) 24%, transparent 46%),
+      linear-gradient(0deg,   rgba(1, 21, 72, 0.94) 0%, rgba(1, 21, 72, 0.45) 32%, transparent 60%);
+  }
 }
 
 /* ─── 12. FAQ accordion ─────────────────────────────────────────── */
@@ -847,4 +1108,132 @@ body {
   .section-title { margin-bottom: 1.75rem; }
 
   .hero { padding: 3.5rem 0 3rem; }
+}
+
+/* ─── 12. Archive page ──────────────────────────────────────────── */
+/* Accessibility helper: hidden visually, still read by assistive tech */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Logo becomes a link back to the homepage in the shared nav */
+.nav-logo-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+/* Persistent active state for the current top-level page in the nav */
+.nav-links a.is-active { color: var(--white); }
+.nav-links a.is-active:not(.btn-join)::after { transform: scaleX(1); }
+
+/* Sticky footer: keep the footer at the bottom on short pages */
+body.page-archive {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.archive-main { flex: 1 0 auto; }
+
+/* A wider column than the prose default so the table can breathe */
+.container--wide { max-width: 1100px; }
+
+/* Horizontal scroll container for the table on narrow viewports */
+.archive-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.archive-table-wrap:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.archive-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.archive-table thead th {
+  background: var(--navy);
+  color: var(--white);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.85rem 1rem;
+  white-space: nowrap;
+}
+
+.archive-table tbody td,
+.archive-table tbody th {
+  padding: 0.95rem 1rem;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+  font-weight: 400;
+}
+
+.archive-table tbody tr:nth-child(even) {
+  background: rgba(1, 21, 72, 0.025);
+}
+.archive-table tbody tr:hover {
+  background: rgba(41, 182, 246, 0.08);
+}
+
+.archive-date {
+  white-space: nowrap;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.archive-title {
+  font-weight: 600;
+  min-width: 16rem;
+  max-width: 24rem;
+  text-align: left;
+}
+.archive-title a {
+  color: var(--blue-dark);
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.archive-title a:hover { text-decoration: underline; }
+.archive-title-arrow {
+  color: var(--cyan);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Placeholder-grey until real AI summaries land */
+.archive-summary {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  min-width: 20rem;
+  max-width: 32rem;
+}
+
+.archive-source {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .archive-table { font-size: 0.875rem; }
+  .archive-table thead th,
+  .archive-table tbody td,
+  .archive-table tbody th { padding: 0.7rem 0.75rem; }
+  .archive-title { min-width: 16rem; }
 }

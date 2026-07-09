@@ -1,0 +1,11 @@
+{# Shared site footer. Set `footer_tagline` (Markdown) before including to
+   override the default line. #}
+{% set tagline = footer_tagline | default(value="We are judged by what we stand for. **Your membership is critical.**") %}
+
+<footer class="footer">
+  <div class="footer-inner">
+    <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="footer-logo">
+    <p class="footer-tagline">{{ tagline | markdown(inline=true) | safe }}</p>
+    <a href="{{ config.extra.join_url }}" class="btn-cta" rel="noopener noreferrer">Join UTAW</a>
+  </div>
+</footer>
