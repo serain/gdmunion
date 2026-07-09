@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ get_url(path='style.css') }}">
+  <link rel="stylesheet" href="{{ get_url(path='style.css') }}?v={{ get_hash(path='style.css', sha256=true) | truncate(length=12, end='') }}">
 </head>
 <body>
 
@@ -194,20 +194,5 @@
   {% include "partials/footer.html" %}
 
   <script src="{{ get_url(path='carousel.js') }}" defer></script>
-  <script>
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        var c = document.querySelector('.why-controls');
-        var ds = document.querySelector('.why-dots');
-        var d0 = document.querySelector('.why-dot');
-        var ar = document.querySelector('.why-arrows');
-        function r(e){ if(!e) return 'null'; var b=e.getBoundingClientRect(); var s=getComputedStyle(e); return JSON.stringify({x:Math.round(b.x),y:Math.round(b.y),w:Math.round(b.width),h:Math.round(b.height),disp:s.display,ov:s.overflow}); }
-        var out = 'controls '+r(c)+'\ndots '+r(ds)+'\ndot0 '+r(d0)+'\narrows '+r(ar);
-        var box=document.createElement('pre');
-        box.style.cssText='position:fixed;top:0;left:0;z-index:99999;background:#fff;color:#000;font:12px monospace;padding:8px;margin:0;white-space:pre';
-        box.textContent=out; document.body.appendChild(box);
-      }, 500);
-    });
-  </script>
 </body>
 </html>
