@@ -88,9 +88,7 @@
       dot.addEventListener('click', function () { show(i); });
     });
 
-    // Pause while the pointer or keyboard focus is on the carousel
-    root.addEventListener('mouseenter', pause);
-    root.addEventListener('mouseleave', resume);
+    // Pause when keyboard focus enters the carousel
     root.addEventListener('focusin', pause);
     root.addEventListener('focusout', function (e) {
       if (!root.contains(e.relatedTarget)) resume();
