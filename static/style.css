@@ -708,29 +708,6 @@ body {
 
 .why-caption:not(.is-active) { pointer-events: none; }
 
-.why-slide-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  border: 1px solid rgba(41, 182, 246, 0.5);
-  padding: 0.3rem 0.75rem;
-  border-radius: 999px;
-  margin-bottom: 1.1rem;
-}
-
-.why-slide-tag::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan);
-}
-
 /* The rotating article is SECONDARY — a caption, not a headline. Its title
    sits well below the static heading and its body below the static lead. */
 .why-slide-title {

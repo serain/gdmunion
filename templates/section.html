@@ -117,7 +117,6 @@
                  role="group" aria-roledescription="slide"
                  aria-label="{{ loop.index }} of {{ total }}"
                  {% if not loop.first %}aria-hidden="true"{% endif %}>
-          <span class="why-slide-tag">AI Summary</span>
           <h3 class="why-slide-title">{{ a.title }}</h3>
           <p class="why-slide-text">{{ a.summary }}</p>
           <p class="why-slide-meta">{{ a.source }} &middot; {{ a.date }}</p>
