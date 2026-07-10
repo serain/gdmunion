@@ -1,14 +1,18 @@
 # News-article frames for the "Why We're Doing This" carousel on the homepage.
 # `summary` is a short digest foregrounding Google's role; these mirror entries
-# in the archive (data/archive.toml). Newest first.
-# Add a frame by copying an [[article]] block. Images live in static/articles/.
+# in the archive (data/archive.toml).
+#
+# Order here is a deliberate narrative arc, not chronological: Google deletes its
+# own ban -> was warned and signed anyway -> the human cost -> the escalation.
 #
 # `focus` sets background-position for the slide (the scrim is heavy on the left
 # and bottom, bright top-right — so bias the subject up and slightly right).
 #
+# NOTE: images below are interim best-fit reuses from the previous slate — they
+# are NOT yet shot-matched to these four stories (esp. slide 1 and slide 4).
+# New CC-licensed images still need sourcing. See git history for the originals.
+#
 # Image credits (all free to use):
-#   ice-subpoena.jpg    — Paul Goyette, "No More Deportations protest at the
-#                         Broadview ICE facility", CC BY 4.0 (Wikimedia Commons)
 #   gaza-censorship.jpg — Hla.bashbash, "A mural on one of the bombed buildings
 #                         on Al Thawra Street", CC BY 4.0 (Wikimedia Commons)
 #   nimbus-cloud.jpg    — PiDatacenters, "Racks Amravati Data Center",
@@ -20,41 +24,33 @@
 #                         West Palm Beach, Feb 2025), public domain (Wikimedia)
 
 [[article]]
-image = "articles/ice-subpoena.jpg"
-focus = "center 38%"
-title = "Google Handed ICE a Student Journalist's Bank and Card Numbers"
-summary = "Google complied with an administrative ICE subpoena — no judge, no order to comply — and turned over a student journalist's bank and credit-card numbers, IP addresses and more, notifying him only after the fact. A friend served near-identical demands was warned in advance and beat them in court."
-source = "The Intercept"
-date = "February 2026"
-
-[[article]]
-image = "articles/gaza-censorship.jpg"
-focus = "center 45%"
-title = "YouTube Erased 700+ Videos Documenting Human Rights Violations"
-summary = "Google's YouTube quietly deleted more than 700 videos and removed the accounts of three prominent Palestinian human-rights groups, wiping out first-hand documentation of abuses — a purge the reporting ties to compliance with US sanctions."
-source = "The Intercept"
-date = "November 2025"
-
-[[article]]
 image = "articles/nimbus-cloud.jpg"
 focus = "center"
-title = "Israel Demanded a Secret 'Wink' to Sidestep Legal Orders"
-summary = "To win the $1.2bn Project Nimbus contract, Google agreed to bypass its own terms of service and covertly signal — a 'wink' — to Israel whenever a foreign court legally compelled it to hand over data, with payouts scaled to the country's dialling code. Officials conceded it 'might collide' with US law."
-source = "The Guardian"
-date = "October 2025"
+title = "Google Erased Its Own Ban on AI for Weapons and Surveillance"
+summary = "Weeks into Trump's second term, Google deleted the promises it made in 2018 — after staff protests over a military drone contract — never to build AI for weapons, for surveillance that violates accepted norms, or for technology that causes overall harm. It didn't call it a reversal; it called it an 'update', leaving a one-line note: 'We've made updates to our AI Principles.'"
+source = "WIRED"
+date = "February 2025"
 
 [[article]]
 image = "articles/gaza-famine.jpg"
 focus = "center 60%"
-title = "Google Ruled Israel's 'There Is Food in Gaza' Ads Aren't Misleading"
-summary = "Google took a six-month, $45m contract to carry the Israeli government's messaging — then its own Trust & Safety team ruled that state ads insisting 'there is food in Gaza', promoted to millions after the UN declared famine, didn't breach its policy on misleading ads. The referee was on the payroll."
-source = "The Washington Post"
-date = "October 2025"
+title = "Google's Own Lawyers Warned Its AI Could Enable Human Rights Abuses. It Signed Anyway."
+summary = "Before signing a $1.2bn deal to supply the Israeli military with cloud and AI, Google's own lawyers and human-rights consultants warned the technology 'could be used for, or linked to, the facilitation of human rights violations', and advised it withhold machine-learning and AI tools from Israel's military. Google signed, refused to write its AI principles into the contract, and — its internal files show — kept no reliable way to monitor how the technology was used."
+source = "The New York Times"
+date = "December 2024"
+
+[[article]]
+image = "articles/gaza-censorship.jpg"
+focus = "center 45%"
+title = "Israel Used Google Photos to Build a Gaza 'Hit List'"
+summary = "Israel ran a facial-recognition dragnet across Gaza, and an Israeli official told the New York Times that Google Photos' face-matching 'worked better' than purpose-built tools — helping assemble a 'hit list' of alleged October 7 participants. Thousands of Palestinians were detained, some tortured. Asked how this squared with its ban on using Photos to cause 'serious and immediate harm', Google declined to answer."
+source = "The Intercept"
+date = "April 2024"
 
 [[article]]
 image = "articles/ice-agents.jpg"
 focus = "center 42%"
-title = "Google Called ICE Agents a 'Vulnerable Group' to Pull a Tracking App"
-summary = "Google removed the ICE-spotting app 'Red Dot' from its Play Store, classifying armed federal agents as a 'vulnerable group' — while continuing to host a Customs and Border Protection app that uses facial recognition to identify immigrants."
-source = "404 Media"
-date = "October 2025"
+title = "Google Signed the Pentagon Clause a Rival Refused on Ethics Grounds"
+summary = "The Pentagon announced deals with eight AI firms — Google among them — to build an 'AI-first fighting force', each agreeing to let the military deploy its models for 'any lawful use'. Rival lab Anthropic refused that clause, fearing its AI would be used for domestic mass surveillance or autonomous lethal weapons, and was branded a 'supply-chain risk' for it. Google signed."
+source = "The Guardian"
+date = "May 2026"
