@@ -6,7 +6,6 @@ title = "GDM Union"
 #   data/updates.toml     — the "What's New" carousel (placeholder for now)
 #   data/faqs.toml        — the FAQ entries
 [extra]
-hero_eyebrow = "Union Recognition Campaign"
 hero_title = "DeepMind Employees are Unionising"
 hero_mission_label = "Honouring our original mission:"
 hero_mission_quote = "To build AI responsibly to benefit humanity."
