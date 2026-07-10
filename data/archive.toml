@@ -18,7 +18,16 @@ url = "https://www.wired.com/story/google-deepmind-unionization-talks-are-off-to
 source = "wired.com"
 summary = "Google DeepMind's initial union recognition talks with the CWU and Unite stalled after senior leadership failed to attend the first Acas-arbitrated meeting, leading employees to allege bad-faith bargaining and union-busting tactics including shutting down internal dissent channels, set against Google's expanding military AI contracts."
 theme = "workers"
-sev = 4
+sev = 5
+
+[[article]]
+date = "June 25, 2026"
+title = "Datacentres are growing target of global climate-related legal cases, report finds"
+url = "https://www.theguardian.com/environment/2026/jun/25/datacentres-facing-increase-in-global-climate-related-legal-cases-report-finds"
+source = "theguardian.com"
+summary = "An LSE analysis of 3,600 climate lawsuits found growing litigation against datacentres over energy, water and pollution, including a successful case halting Google's planned Santiago datacentre for failing to consider climate impacts on the city's water supply."
+theme = "climate"
+sev = 3
 
 [[article]]
 date = "June 25, 2026"
@@ -27,7 +36,7 @@ url = "https://www.blackhc.net/essays/trust_is_not_governance/"
 source = "blackhc.net"
 summary = "UTAW member Andreas Kirsch argues DeepMind's safety culture cannot substitute for real governance, citing Google's Pentagon contract as proof that trust in leadership fails when commercial and national-security pressure intervenes."
 theme = "policy"
-sev = 3
+sev = 2
 
 [[article]]
 date = "June 11, 2026"
@@ -36,7 +45,7 @@ url = "https://www.businessinsider.com/google-director-resigned-pentagon-ai-deal
 source = "businessinsider.com"
 summary = "Google Android security director René Mayrhofer resigned, writing that management 'lost its moral compass' after signing Pentagon AI contracts he says could enable mass surveillance of EU citizens and violate international law."
 theme = "military"
-sev = 8
+sev = 7
 
 [[article]]
 date = "May 22, 2026"
@@ -46,6 +55,24 @@ source = "personneltoday.com"
 summary = "Google declined the CWU and Unite's request for voluntary recognition of its DeepMind staff, offering instead to negotiate through the Acas conciliation service, an early step toward what could become Google's first recognised UK union."
 theme = "workers"
 sev = 4
+
+[[article]]
+date = "May 9, 2026"
+title = "Google developers significantly misstate carbon emissions of proposed UK datacentres"
+url = "https://www.theguardian.com/technology/2026/may/09/google-developers-significantly-misstate-carbon-emissions-of-proposed-uk-datacentres"
+source = "theguardian.com"
+summary = "Google developers understated the carbon emissions of two proposed Essex AI datacentres by a factor of five in planning documents, comparing one year of emissions against the UK's entire five-year carbon budget, according to analysis by the tech justice nonprofit Foxglove."
+theme = "climate"
+sev = 4
+
+[[article]]
+date = "May 13, 2026"
+title = "Data Center Cooling Water Discharge: Assessing Environmental Transparency and Information Gaps"
+url = "https://repository.uclawsf.edu/hastings_environmental_law_journal/vol32/iss2/4"
+source = "UC Law Environmental Journal"
+summary = "A law journal article examines the environmental impacts of data center cooling water discharge and the lack of transparency in discharge practices, finding that most cooling water data remains confidential, making it difficult to assess whether practices protect water systems."
+theme = "climate"
+sev = 3
 
 [[article]]
 date = "May 4, 2026"
@@ -63,7 +90,7 @@ url = "https://www.theguardian.com/us-news/2026/may/01/pentagon-us-military-pair
 source = "theguardian.com"
 summary = "The Pentagon announced agreements with eight AI companies, including Google, to deploy their technology for 'any lawful use', part of a multibillion-dollar push to make the US military an 'AI-first fighting force' spanning classified networks and drone warfare."
 theme = "military"
-sev = 8
+sev = 7
 
 [[article]]
 date = "April 27, 2026"
@@ -72,7 +99,7 @@ url = "https://web.archive.org/web/20260512162515/https://thenextweb.com/news/go
 source = "thenextweb.com"
 summary = "More than 580 Google and DeepMind employees signed a letter urging CEO Sundar Pichai to refuse a classified Pentagon AI contract, warning that air-gapped military systems would leave Google unable to monitor how its models are used."
 theme = "workers"
-sev = 6
+sev = 3
 
 [[article]]
 date = "April 16, 2026"
@@ -117,7 +144,7 @@ url = "https://web.archive.org/web/20260512020359/https://newrepublic.com/post/2
 source = "newrepublic.com"
 summary = "After a 67-year-old US citizen criticised a Homeland Security prosecutor from his Gmail account, Google notified him that DHS had served an administrative subpoena compelling release of his Google account data, giving him a week to challenge it."
 theme = "ice"
-sev = 6
+sev = 5
 
 [[article]]
 date = "February 1, 2026"
@@ -126,7 +153,7 @@ url = "https://web.archive.org/web/20260201133756/https://www.washingtonpost.com
 source = "washingtonpost.com"
 summary = "A whistleblower's SEC complaint alleges Google breached its own ethics rules to help an Israeli defence contractor apply AI to drone-surveillance footage."
 theme = "israel"
-sev = 9
+sev = 8
 
 [[article]]
 date = "December 30, 2025"
@@ -135,7 +162,7 @@ url = "https://www.theguardian.com/world/2025/dec/30/israeli-military-big-tech"
 source = "theguardian.com"
 summary = "A year-long Guardian investigation, with +972 Magazine, into Silicon Valley's symbiotic ties with the Israeli military, spanning Google and Amazon's $1.2bn Project Nimbus contract and cloud-stored intercepted Palestinian phone data used to guide deadly Gaza airstrikes."
 theme = "israel"
-sev = 9
+sev = 8
 
 [[article]]
 date = "December 9, 2025"
@@ -171,7 +198,7 @@ url = "https://www.reuters.com/business/googles-32-billion-deal-wiz-clears-doj-a
 source = "reuters.com"
 summary = "Google's $32 billion acquisition of Israeli cloud-security firm Wiz cleared US Department of Justice antitrust review, opening the way for its largest-ever takeover."
 theme = "policy"
-sev = 3
+sev = 1
 
 [[article]]
 date = "November 4, 2025"
@@ -189,7 +216,7 @@ url = "https://web.archive.org/web/20251029133741/https://www.972mag.com/project
 source = "972mag.com"
 summary = "To secure Project Nimbus, Google and Amazon agreed to bypass their own terms of service and secretly signal, or 'wink', to Israel if a foreign court sought access to its data."
 theme = "israel"
-sev = 8
+sev = 9
 
 [[article]]
 date = "October 29, 2025"
@@ -198,7 +225,7 @@ url = "https://www.theguardian.com/us-news/2025/oct/29/google-amazon-israel-cont
 source = "theguardian.com"
 summary = "To win the $1.2bn Project Nimbus contract, Google and Amazon agreed to Israel's demand for a secret 'winking mechanism' — a coded signal revealing which foreign governments had legally compelled them to hand over Israeli data, circumventing gag orders."
 theme = "israel"
-sev = 8
+sev = 9
 
 [[article]]
 date = "October 15, 2025"
@@ -207,7 +234,7 @@ url = "https://web.archive.org/web/20260407194946/https://www.washingtonpost.com
 source = "washingtonpost.com"
 summary = "An internal Google email showed the company ruled that Israeli government YouTube ads claiming 'there is food in Gaza' were not misleading, letting them stay online despite many complaints."
 theme = "israel"
-sev = 8
+sev = 7
 
 [[article]]
 date = "October 3, 2025"
@@ -216,7 +243,7 @@ url = "https://web.archive.org/web/20251003221908/https://www.404media.co/google
 source = "404media.co"
 summary = "Google removed the ICE-spotting app 'Red Dot' from its Play Store, classifying ICE agents as a vulnerable group, amid a wider crackdown on apps that track immigration enforcement."
 theme = "ice"
-sev = 7
+sev = 8
 
 [[article]]
 date = "September 16, 2025"
@@ -225,7 +252,7 @@ url = "https://web.archive.org/web/20250916171754/https://theintercept.com/2025/
 source = "theintercept.com"
 summary = "Google secretly handed a pro-Palestine student activist's Gmail account data to ICE in response to a subpoena, without notifying him or giving him a chance to challenge it."
 theme = "ice"
-sev = 8
+sev = 9
 
 [[article]]
 date = "September 3, 2025"
@@ -246,13 +273,22 @@ theme = "military"
 sev = 6
 
 [[article]]
+date = "July 8, 2025"
+title = "Google's Sergey Brin calls U.N. 'transparently antisemitic' after report on tech and Gaza"
+url = "https://www.washingtonpost.com/technology/2025/07/08/sergey-brin-united-nations-gaza-israel/"
+source = "washingtonpost.com"
+summary = "Google co-founder Sergey Brin called the UN 'transparently antisemitic' on an internal DeepMind forum in response to a UN report accusing Alphabet and other tech companies of complicity in Israel's military operations in Gaza through Project Nimbus cloud and AI contracts."
+theme = "israel"
+sev = 7
+
+[[article]]
 date = "July 2, 2025"
 title = "From economy of occupation to economy of genocide"
 url = "https://web.archive.org/web/20250702122031/https://www.un.org/unispal/document/a-hrc-59-23-from-economy-of-occupation-to-economy-of-genocide-report-special-rapporteur-francesca-albanese-palestine-2025/"
 source = "un.org"
 summary = "The UN Special Rapporteur's report names Alphabet (Google) among corporations sustaining Israel's 'economy of genocide', citing the $1.2 billion Project Nimbus contract and the Google-Amazon consortium that supplied critical cloud and AI capacity to Israel's military."
 theme = "israel"
-sev = 9
+sev = 8
 
 [[article]]
 date = "May 12, 2025"
@@ -306,7 +342,7 @@ url = "https://web.archive.org/web/20250319023126/https://blog.google/inside-goo
 source = "blog.google"
 summary = "Google announced a definitive agreement to acquire Israeli cloud-security firm Wiz for $32 billion in an all-cash deal, its largest-ever acquisition, with Wiz set to join Google Cloud."
 theme = "policy"
-sev = 3
+sev = 2
 
 [[article]]
 date = "February 18, 2025"
@@ -315,7 +351,7 @@ url = "https://web.archive.org/web/20250218224912/https://apnews.com/article/isr
 source = "apnews.com"
 summary = "US tech giants including Google quietly ramped up AI and computing services to Israel's military, helping it track and strike far more targets in Gaza and Lebanon, an AP investigation found."
 theme = "israel"
-sev = 9
+sev = 8
 
 [[article]]
 date = "February 4, 2025"
@@ -378,7 +414,7 @@ url = "https://web.archive.org/web/20240814002054/https://responsiblestatecraft.
 source = "responsiblestatecraft.org"
 summary = "An investigation found Israel's military uses Google Cloud, Amazon and Microsoft to store surveillance data and run AI on Gaza, with purchases surging through the Google-Amazon Project Nimbus contract since October 2023, some data used in air strikes."
 theme = "israel"
-sev = 8
+sev = 7
 
 [[article]]
 date = "August 4, 2024"
@@ -387,7 +423,7 @@ url = "https://web.archive.org/web/20240804174217/https://www.972mag.com/cloud-i
 source = "972mag.com"
 summary = "An investigation revealed Israel's army relies on Amazon's cloud and on AI from Google and Microsoft for military operations in Gaza, with Google among the providers powering wartime data processing."
 theme = "israel"
-sev = 7
+sev = 6
 
 [[article]]
 date = "July 15, 2024"
@@ -406,6 +442,15 @@ source = "404media.co"
 summary = "Google Cloud was listed as a sponsor of the 'IT for IDF 2024' Israeli military conference, then removed after scrutiny, though it remained named as a client of the event's organiser."
 theme = "israel"
 sev = 5
+
+[[article]]
+date = "July 2, 2024"
+title = "Google's 2024 Environmental Report"
+url = "https://sustainability.google/reports/google-2024-environmental-report/"
+source = "sustainability.google"
+summary = "Google's annual environmental report revealed total GHG emissions rose 13% year-over-year, driven primarily by increased data centre energy consumption and supply chain emissions, even as the company claimed progress on renewable energy and efficiency."
+theme = "climate"
+sev = 4
 
 [[article]]
 date = "May 2, 2024"
@@ -468,7 +513,7 @@ url = "https://web.archive.org/web/20260216170405/https://en.globes.co.il/en/art
 source = "en.globes.co.il"
 summary = "Israeli government ministries were slow to migrate to the Google and Amazon cloud services provided under the Project Nimbus contract, Globes reported."
 theme = "israel"
-sev = 2
+sev = 1
 
 [[article]]
 date = "July 24, 2022"
@@ -486,7 +531,7 @@ url = "https://web.archive.org/web/20260615162520/https://theintercept.com/2022/
 source = "theintercept.com"
 summary = "Google and Amazon faced a shareholder revolt over Project Nimbus, the $1.2 billion contract that shields Israel's government computing from political pressure tied to its occupation of Palestinian territory."
 theme = "workers"
-sev = 5
+sev = 4
 
 [[article]]
 date = "March 15, 2022"
@@ -504,7 +549,7 @@ url = "https://web.archive.org/web/20260622030538/https://www.businessinsider.co
 source = "businessinsider.com"
 summary = "Google, alongside Amazon and Microsoft, used third-party intermediaries to quietly secure dozens of contracts with ICE and CBP worth millions, sidestepping public scrutiny and employee objections."
 theme = "ice"
-sev = 7
+sev = 8
 
 [[article]]
 date = "April 21, 2021"
