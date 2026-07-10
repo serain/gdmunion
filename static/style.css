@@ -1347,12 +1347,16 @@ body.page-archive {
 /* A wider column than the prose default so the table can breathe */
 .container--wide { max-width: 1100px; }
 
-/* Horizontal scroll container for the table on narrow viewports */
+/* Archive table. Designed to read as one filed system with the timeline map
+   above it: the same card, the same lane colours carried as a spine down each
+   row, and dates/sources set as monospaced archival metadata.
+   `table-layout: fixed` pins the table to exactly its card width at every
+   viewport, so content wraps to fit and an inner scrollbar never appears. */
 .archive-table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
 }
 .archive-table-wrap:focus-visible {
   outline: 2px solid var(--cyan);
@@ -1361,47 +1365,64 @@ body.page-archive {
 
 .archive-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   font-size: 0.95rem;
   text-align: left;
 }
+.col-date    { width: 12%; }
+.col-article { width: 28%; }
+.col-summary { width: 45%; }
+.col-source  { width: 15%; }
 
+/* Header — echoes the navy nav. */
 .archive-table thead th {
   background: var(--navy);
-  color: var(--white);
-  font-size: var(--fs-label);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 0.85rem 1rem;
-  white-space: nowrap;
+  letter-spacing: 0.1em;
+  padding: 0.8rem 1.1rem;
 }
 
+/* Body cells */
 .archive-table tbody td,
 .archive-table tbody th {
-  padding: 0.95rem 1rem;
+  padding: 1.05rem 1.1rem;
   border-top: 1px solid var(--border);
   vertical-align: top;
   font-weight: 400;
 }
+.archive-table tbody tr { transition: background 0.14s ease; }
 
-.archive-table tbody tr:nth-child(even) {
-  background: rgba(1, 21, 72, 0.025);
-}
-.archive-table tbody tr:hover {
-  background: rgba(41, 182, 246, 0.08);
+/* Theme spine — the map's lane colours, filed down the left edge of each row. */
+.archive-table tbody tr[data-theme="policy"]   { --row: #2a78d6; }
+.archive-table tbody tr[data-theme="military"] { --row: #eda100; }
+.archive-table tbody tr[data-theme="israel"]   { --row: #e34948; }
+.archive-table tbody tr[data-theme="ice"]      { --row: #4a3aa7; }
+.archive-table tbody tr[data-theme="climate"]  { --row: #008300; }
+.archive-table tbody tr[data-theme="workers"]  { --row: #1baf7a; }
+.archive-table tbody td.archive-date {
+  box-shadow: inset 3px 0 0 var(--row, transparent);
 }
 
+.archive-table tbody tr:hover { background: rgba(41, 182, 246, 0.07); }
+
+/* Date — archival metadata: monospaced, tabular, quiet; clears the spine. */
 .archive-date {
-  white-space: nowrap;
   color: var(--muted);
+  font-family: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  padding-left: 1.4rem;
 }
 
+/* Title — the focal column */
 .archive-title {
   font-weight: 600;
-  min-width: 16rem;
-  max-width: 24rem;
   text-align: left;
 }
 .archive-title a {
@@ -1410,31 +1431,44 @@ body.page-archive {
   font-weight: 700;
   line-height: 1.4;
 }
-.archive-title a:hover { text-decoration: underline; }
+.archive-title a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
 .archive-title-arrow {
   color: var(--cyan);
   font-weight: 700;
   white-space: nowrap;
+  opacity: 0.6;
 }
+.archive-title a:hover .archive-title-arrow { opacity: 1; }
 
-/* Placeholder-grey until real AI summaries land */
+/* Summary — the substance. */
 .archive-summary {
-  color: var(--muted);
+  color: #2b3542;
   font-size: 0.9rem;
-  line-height: 1.5;
-  min-width: 20rem;
-  max-width: 32rem;
+  line-height: 1.55;
 }
 
+/* Source — a citation: the domain, monospaced and quiet; long domains break. */
 .archive-source {
   color: var(--muted);
-  white-space: nowrap;
+  font-family: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
 }
 
 @media (max-width: 720px) {
   .archive-table { font-size: 0.875rem; }
-  .archive-table thead th,
+  .archive-table thead th {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    padding: 0.6rem 0.5rem;
+  }
   .archive-table tbody td,
-  .archive-table tbody th { padding: 0.7rem 0.75rem; }
-  .archive-title { min-width: 16rem; }
+  .archive-table tbody th { padding: 0.75rem 0.5rem; }
+  .archive-date { padding-left: 0.85rem; font-size: 0.72rem; }
+  .archive-summary { font-size: 0.82rem; }
 }

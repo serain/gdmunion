@@ -12,6 +12,58 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ get_url(path='style.css') }}?v={{ get_hash(path='style.css', sha256=true) | truncate(length=12, end='') }}">
+  <style>
+  /* ── Archive map: theme-swimlane timeline above the table ───────── */
+  .archive-map{
+    --am-policy:#2a78d6; --am-military:#eda100; --am-israel:#e34948;
+    --am-ice:#4a3aa7; --am-workers:#1baf7a; --am-marker:#e34948;
+    --am-panel:#f5f7fc; --am-stroke:rgba(1,21,72,.30);
+    margin:0 0 2.75rem; padding:clamp(1rem,2.5vw,1.5rem);
+    border:1px solid var(--border); border-radius:12px; background:#fff;
+  }
+  .archive-map[hidden]{display:none;}
+  .am-controls{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:0 0 1rem;}
+  .am-chip{font:700 .8rem/1 'Barlow',sans-serif;padding:.45rem .8rem;border-radius:20px;
+    border:1.5px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;
+    display:inline-flex;align-items:center;gap:.45rem;transition:background .14s ease,border-color .14s ease,color .14s ease;}
+  .am-chip .am-sw{width:10px;height:10px;border-radius:50%;background:var(--c,#999);flex:none;}
+  .am-chip[aria-pressed="true"]{color:var(--navy);border-color:var(--c,var(--navy));
+    background:color-mix(in srgb,var(--c,#0b1b4a) 9%,#fff);}
+  .am-chip.am-all[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .am-chip:hover{border-color:var(--c,var(--muted));}
+  .am-chip:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
+  .am-status{margin-left:auto;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .am-status button{background:none;border:0;color:var(--blue);font:inherit;font-weight:700;cursor:pointer;padding:0 0 0 .5rem;}
+  .am-status button:hover{text-decoration:underline;}
+  .am-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative;}
+  .am-svg{display:block;width:100%;min-width:660px;height:auto;}
+  .am-grid{stroke:rgba(1,21,72,.08);stroke-width:1;}
+  .am-yr{fill:var(--muted);font:600 11px ui-monospace,Menlo,monospace;opacity:.7;}
+  .am-lane-lbl{fill:var(--navy);font:700 12px 'Barlow',sans-serif;}
+  .am-lane-cnt{fill:var(--muted);font:600 10.5px ui-monospace,Menlo,monospace;opacity:.75;}
+  .am-lane-base{stroke:var(--border);stroke-width:1;}
+  .am-band{fill:var(--am-panel);opacity:.6;}
+  .am-dot{cursor:pointer;transition:opacity .18s ease;}
+  .am-dot circle{transition:transform .16s ease;transform-box:fill-box;transform-origin:center;}
+  .am-dot:hover circle{transform:scale(1.35);}
+  .am-dot.am-dim{opacity:.10;pointer-events:none;}
+  .am-mk{stroke:var(--am-marker);stroke-width:1.6;stroke-dasharray:3 4;opacity:.85;}
+  .am-mk-lbl{fill:var(--am-marker);font:700 10.5px 'Barlow',sans-serif;}
+  .am-mk-dot{fill:var(--am-marker);}
+  .am-tip{position:absolute;z-index:20;pointer-events:none;max-width:280px;background:var(--navy);
+    color:#fff;border-radius:10px;padding:.6rem .7rem;box-shadow:0 12px 30px -8px rgba(1,21,72,.5);
+    opacity:0;transform:translateY(4px);transition:opacity .12s ease;font-size:.84rem;}
+  .am-tip.am-on{opacity:1;transform:none;}
+  .am-tip .am-tt{font-weight:700;line-height:1.3;margin:0 0 .3rem;}
+  .am-tip .am-tm{color:rgba(255,255,255,.72);font:.72rem/1.5 ui-monospace,Menlo,monospace;}
+  .am-tip .am-go{color:var(--cyan);font-weight:700;font-size:.74rem;margin-top:.35rem;}
+  /* table filtering — JS-managed; supersede the nth-child zebra so it stays even when filtered */
+  .archive-table tbody tr.am-hidden{display:none;}
+  .archive-table tbody tr:nth-child(even){background:transparent;}
+  .archive-table tbody tr.am-alt{background:rgba(1,21,72,.025);}
+  .archive-table tbody tr.am-hot{background:rgba(41,182,246,.10);}
+  @media (prefers-reduced-motion:reduce){.am-dot circle,.am-tip,.am-chip{transition:none;}}
+  </style>
 </head>
 <body class="page-archive">
 
@@ -25,6 +77,20 @@
         <p class="section-intro">{{ section.extra.intro }}</p>
 
         {% set articles = load_data(path="data/archive.toml") %}
+
+        {# Timeline map — built by JS from the table rows below (single source
+           of truth). Hidden until JS enhances it, so no-JS users just get the
+           table. #}
+        <figure class="archive-map" hidden aria-label="Timeline of the archive by theme, 2020 to 2026. The full data is in the table below.">
+          <div class="am-controls" role="group" aria-label="Filter the archive by theme">
+            <span class="am-status" hidden></span>
+          </div>
+          <div class="am-scroll">
+            <svg class="am-svg" role="img" aria-label="Timeline of the archived articles, grouped into five theme lanes from 2020 to 2026. The full data is in the table below."></svg>
+            <div class="am-tip" aria-hidden="true"></div>
+          </div>
+        </figure>
+
         {# Placeholder AI summaries until real ones are written. A row can
            override this by setting `summary = "..."` in data/archive.toml. #}
         {% set lorem = [
@@ -46,7 +112,7 @@
             </thead>
             <tbody>
               {% for a in articles.article %}
-              <tr>
+              <tr data-theme="{{ a.theme | default(value='policy') }}" data-sev="{{ a.sev | default(value=5) }}">
                 <td class="archive-date">{{ a.date }}</td>
                 <th scope="row" class="archive-title">
                   {% if a.url %}
@@ -66,6 +132,208 @@
       </div>
     </section>
   </main>
+
+  <script>
+  /* Archive timeline map. Reads the table rows (the single source of truth),
+     draws a theme-swimlane timeline, and filters the same table by theme. */
+  (function(){
+    var fig = document.querySelector('.archive-map');
+    var svg = fig && fig.querySelector('.am-svg');
+    var rows = [].slice.call(document.querySelectorAll('.archive-table tbody tr'));
+    if (!fig || !svg || !rows.length) return;
+
+    var THEMES = [
+      {k:'policy',   name:'AI Principles & Policy', c:'#2a78d6'},
+      {k:'military', name:'US Military & Pentagon', c:'#eda100'},
+      {k:'israel',   name:'Israel & Gaza',          c:'#e34948'},
+      {k:'ice',      name:'ICE & Border',           c:'#4a3aa7'},
+      {k:'climate',  name:'Climate & Datacentres',  c:'#008300'},
+      {k:'workers',  name:'Workers & Dissent',      c:'#1baf7a'}
+    ];
+    var CMAP = {}; THEMES.forEach(function(t){ CMAP[t.k] = t.c; });
+
+    var DATA = rows.map(function(tr, i){
+      var link = tr.querySelector('.archive-title a');
+      var titleEl = link || tr.querySelector('.archive-title');
+      var srcEl = tr.querySelector('.archive-source');
+      return {
+        i: i, row: tr,
+        theme: tr.getAttribute('data-theme') || 'policy',
+        sev: +(tr.getAttribute('data-sev') || 5),
+        date: tr.querySelector('.archive-date').textContent.trim(),
+        title: (titleEl ? titleEl.textContent : '').replace(/\s*↗\s*$/, '').trim(),
+        url: link ? link.getAttribute('href') : '',
+        source: srcEl ? srcEl.textContent.trim() : ''
+      };
+    });
+    DATA.forEach(function(d){ d.t = +new Date(d.date); });
+
+    var NS = 'http://www.w3.org/2000/svg';
+    function el(n, a){ var e = document.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); return e; }
+    var sevR = function(s){ return 3 + (s - 1) * 0.72; };            // sev 1..9 -> r 3..8.8
+    var laneH = 54;
+
+    var W = 960, L = 156, R = 24, yTop = 42;
+    var H = yTop + THEMES.length * laneH + 16;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+    var times = DATA.map(function(d){ return d.t; });
+    var pad = 95 * 864e5;
+    var t0 = Math.min.apply(null, times) - pad, t1 = Math.max.apply(null, times) + pad;
+    var x = function(t){ return L + (t - t0) / (t1 - t0) * (W - L - R); };
+    var PLEDGE = +new Date('2025-02-04');
+
+    var gGrid = el('g'), gLanes = el('g'), gMark = el('g'), gDots = el('g');
+    svg.appendChild(gGrid); svg.appendChild(gLanes); svg.appendChild(gMark); svg.appendChild(gDots);
+
+    // year gridlines
+    for (var y = 2021; y <= 2026; y++){
+      var px = x(+new Date(y, 0, 1));
+      gGrid.appendChild(el('line', {x1:px, y1:yTop, x2:px, y2:yTop + THEMES.length*laneH, 'class':'am-grid'}));
+      var yl = el('text', {x:px, y:yTop - 8, 'text-anchor':'middle', 'class':'am-yr'}); yl.textContent = y; gGrid.appendChild(yl);
+    }
+
+    // lanes
+    var laneY = {};
+    THEMES.forEach(function(t, idx){
+      var top = yTop + idx * laneH, cy = top + laneH / 2; laneY[t.k] = cy;
+      if (idx % 2 === 0) gLanes.appendChild(el('rect', {x:L, y:top, width:W - L - R, height:laneH, 'class':'am-band'}));
+      gLanes.appendChild(el('line', {x1:L, y1:top + laneH, x2:W - R, y2:top + laneH, 'class':'am-lane-base'}));
+      var lb = el('text', {x:10, y:cy - 2, 'class':'am-lane-lbl'}); lb.textContent = t.name; gLanes.appendChild(lb);
+      var n = DATA.filter(function(d){ return d.theme === t.k; }).length;
+      var cc = el('text', {x:10, y:cy + 13, 'class':'am-lane-cnt'}); cc.textContent = n + ' articles'; gLanes.appendChild(cc);
+      gLanes.appendChild(el('circle', {cx:L - 14, cy:cy, r:4, fill:t.c}));
+    });
+
+    // pledge marker
+    var mx = x(PLEDGE), mTop = yTop, mBot = yTop + THEMES.length * laneH;
+    gMark.appendChild(el('line', {x1:mx, y1:mTop, x2:mx, y2:mBot, 'class':'am-mk'}));
+    gMark.appendChild(el('circle', {cx:mx, cy:mTop, r:3, 'class':'am-mk-dot'}));
+    var ml = el('text', {x:mx - 6, y:mTop - 22, 'text-anchor':'end', 'class':'am-mk-lbl'});
+    ml.textContent = 'Feb 2025 — pledge dropped'; gMark.appendChild(ml);
+
+    // tooltip
+    var tip = fig.querySelector('.am-tip'), scroll = fig.querySelector('.am-scroll');
+    function moveTip(e){
+      var r = scroll.getBoundingClientRect();
+      var tx = e.clientX - r.left + 14, ty = e.clientY - r.top + 14;
+      tip.style.left = Math.max(4, Math.min(tx, r.width - tip.offsetWidth - 8)) + 'px';
+      tip.style.top = Math.max(4, Math.min(ty, r.height - tip.offsetHeight - 8)) + 'px';
+    }
+
+    // Beeswarm: pack each lane's dots vertically so none overlap — they hug the
+    // centre line and only spread out where the timeline gets busy. Deterministic
+    // (sorted by date), so the layout is stable across renders.
+    DATA.forEach(function(d){ d.px = x(d.t); d.r = sevR(d.sev); });
+    THEMES.forEach(function(t){
+      var pts = DATA.filter(function(d){ return d.theme === t.k; });
+      pts.sort(function(a, b){ return a.px - b.px || b.r - a.r; });
+      var placed = [], gap = 1.6;
+      pts.forEach(function(p){
+        var cap = (laneH / 2 - 2) - p.r, best = null;
+        for (var mag = 0; mag <= cap + 0.01 && best === null; mag += 1) {
+          var opts = mag === 0 ? [0] : [mag, -mag];
+          for (var oi = 0; oi < opts.length; oi++) {
+            var off = opts[oi], ok = true;
+            for (var k = 0; k < placed.length; k++) {
+              var q = placed[k], dx = p.px - q.px, mind = p.r + q.r + gap;
+              if (Math.abs(dx) >= mind) continue;
+              if (dx * dx + (off - q.off) * (off - q.off) < mind * mind) { ok = false; break; }
+            }
+            if (ok) { best = off; break; }
+          }
+        }
+        p.off = best === null ? (placed.length % 2 ? cap : -cap) : best;
+        placed.push(p);
+      });
+    });
+
+    // dots (largest first so small ones stay clickable on top)
+    DATA.slice().sort(function(a, b){ return b.sev - a.sev; }).forEach(function(d){
+      var g = el('g', {'class':'am-dot'});
+      g.appendChild(el('circle', {cx:d.px, cy:laneY[d.theme] + d.off, r:d.r,
+        fill:CMAP[d.theme], stroke:'var(--am-stroke)', 'stroke-width':1, 'fill-opacity':0.92}));
+      g.setAttribute('tabindex', '0');
+      g.setAttribute('role', 'link');
+      g.setAttribute('aria-label', d.title + ' — ' + d.source + ', ' + d.date);
+      d.node = g;
+      var dots = '';
+      for (var s = 0; s < 9; s++) dots += '<span style="display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:1px;background:' + (s < d.sev ? '#fff' : 'rgba(255,255,255,.3)') + '"></span>';
+      function enter(e){
+        tip.innerHTML = '<p class="am-tt">' + d.title + '</p><div class="am-tm">' + d.source + ' &middot; ' + d.date +
+          '<br>severity ' + dots + '</div><div class="am-go">Click to open ↗</div>';
+        tip.classList.add('am-on'); if (e && e.clientX) moveTip(e);
+        d.row.classList.add('am-hot');
+      }
+      function leave(){ tip.classList.remove('am-on'); d.row.classList.remove('am-hot'); }
+      function open(){ if (d.url) window.open(d.url, '_blank', 'noopener'); }
+      g.addEventListener('mouseenter', enter);
+      g.addEventListener('mousemove', moveTip);
+      g.addEventListener('mouseleave', leave);
+      g.addEventListener('focus', enter);
+      g.addEventListener('blur', leave);
+      g.addEventListener('click', open);
+      g.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+      gDots.appendChild(g);
+    });
+
+    // filtering — chips drive the table + dim dots
+    var state = {};
+    var controls = fig.querySelector('.am-controls');
+    var status = fig.querySelector('.am-status');
+
+    function restripe(){
+      var alt = false;
+      DATA.forEach(function(d){
+        if (d.row.classList.contains('am-hidden')) return;
+        d.row.classList.toggle('am-alt', alt); alt = !alt;
+      });
+    }
+    function apply(){
+      var keys = Object.keys(state), all = keys.length === 0, shown = 0;
+      DATA.forEach(function(d){
+        var show = all || state[d.theme];
+        d.row.classList.toggle('am-hidden', !show);
+        d.node.classList.toggle('am-dim', !show);
+        if (show) shown++;
+      });
+      restripe();
+      if (all){ status.hidden = true; status.innerHTML = ''; }
+      else {
+        status.hidden = false;
+        status.innerHTML = 'Showing ' + shown + ' of ' + DATA.length +
+          '<button type="button" class="am-clear">Clear</button>';
+        status.querySelector('.am-clear').addEventListener('click', function(){ state = {}; apply(); });
+      }
+      [].forEach.call(controls.querySelectorAll('.am-chip'), function(btn){
+        var k = btn.getAttribute('data-k');
+        btn.setAttribute('aria-pressed', k === 'all' ? all : !!state[k]);
+      });
+    }
+
+    function chip(k, label, c){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'am-chip' + (k === 'all' ? ' am-all' : '');
+      b.setAttribute('data-k', k); b.setAttribute('aria-pressed', k === 'all');
+      if (c) b.style.setProperty('--c', c);
+      b.innerHTML = (c ? '<span class="am-sw"></span>' : '') + label;
+      b.addEventListener('click', function(){
+        if (k === 'all') state = {};
+        else {
+          if (state[k]) delete state[k]; else state[k] = true;
+          if (Object.keys(state).length === THEMES.length) state = {};
+        }
+        apply();
+      });
+      controls.insertBefore(b, status);
+    }
+    chip('all', 'All themes', null);
+    THEMES.forEach(function(t){ chip(t.k, t.name, t.c); });
+
+    apply();
+    fig.removeAttribute('hidden');
+  })();
+  </script>
 
   {% include "partials/footer.html" %}
 </body>
