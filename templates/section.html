@@ -119,7 +119,10 @@
                  {% if not loop.first %}aria-hidden="true"{% endif %}>
           <h3 class="why-slide-title">{{ a.title }}</h3>
           <p class="why-slide-text">{{ a.summary }}</p>
-          <p class="why-slide-meta">{{ a.source }} &middot; {{ a.date }}</p>
+          <a class="why-slide-meta" href="{{ a.url }}" target="_blank" rel="noopener noreferrer">
+            {{ a.source }} &middot; {{ a.date }}
+            <span class="why-slide-meta-arrow" aria-hidden="true">&#8599;</span>
+          </a>
         </article>
         {% endfor %}
       </div>

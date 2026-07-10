@@ -874,13 +874,32 @@ body {
 }
 
 .why-slide-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   margin-top: 0.9rem;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
+
+.why-slide-meta:hover {
+  color: var(--white);
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+.why-slide-meta-arrow {
+  font-size: 0.85em;
+  transition: transform 0.2s ease;
+}
+
+.why-slide-meta:hover .why-slide-meta-arrow { transform: translate(2px, -2px); }
 
 /* Auto-advance progress bar — spans the full stage width along the top.
    Doubles as the autoplay clock: carousel.js advances when it finishes. */
