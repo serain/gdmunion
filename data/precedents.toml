@@ -2,31 +2,43 @@
 # Add a card by copying a [[precedent]] block. Images live in static/precedents/.
 
 [[precedent]]
-headline = "£80M pulled from Israeli bonds"
+headline = "Pension fund dumps Israeli bonds over human rights"
 text = "In 2024, university staff pressured the USS, the UK's largest private pension fund, into divesting from Israeli bonds over human rights violations."
 image = "precedents/divestment.jpg"
+focus = "center 70%"
+union = "UCU · 2024"
 
 [[precedent]]
 headline = "Phone lines to apartheid South Africa cut"
-text = "In the 1980s, British Telecom employees refused to connect calls to apartheid South Africa, using their position on the network to apply direct pressure on the regime."
+text = "In 1977, the Union of Post Office Workers called on members to stop telephone and postal traffic to apartheid South Africa, using their grip on the network to squeeze the regime."
 image = "precedents/apartheid.jpg"
+focus = "center 60%"
+union = "UPW · 1977"
 
 [[precedent]]
-headline = "Legal protection from AI replicas"
-text = "In January 2025, UK actors voted 99.6% to refuse AI body scans on set, forcing film and TV producers to the table to negotiate protections for their likenesses."
+headline = "Actors vote 99.6% to refuse AI scans"
+text = "In December 2025, UK actors balloted 99.6% in favour of refusing AI body scans on set, piling pressure on producers to negotiate real protections."
 image = "precedents/ai-performers.jpg"
+focus = "center 62%"
+union = "Equity · 2025"
 
 [[precedent]]
-headline = "Pinochet's warplanes left unserviced"
+headline = "Rolls-Royce employees grounded Pinochet's jets"
 text = "In 1974, more than 3000 employees at the Rolls-Royce factory in Scotland refused to repair Chilean Air Force engines, helping ground Pinochet's air force for four years."
 image = "precedents/arms.jpg"
+focus = "center 40%"
+union = "AUEW · 1974"
 
 [[precedent]]
-headline = "Port automation banned to 2030"
-text = "US dockworkers used a 2024 strike to ban automated cranes and driverless vehicles, shielding jobs from AI-led redundancy."
+headline = "47,000 dockworkers curb AI automation"
+text = "In 2024, the ILA shut down every port from Maine to Texas — 47,000 dockworkers walking out until shipping giants agreed to guard their jobs against automation through 2030."
 image = "precedents/ports.jpg"
+focus = "center 78%"
+union = "ILA · 2024"
 
 [[precedent]]
 headline = "No AI cloning without consent"
-text = "Video-game performers struck major studios in 2024 to stop AI replicating voices and likenesses without consent or pay."
+text = "In 2024, SAG-AFTRA's video-game performers walked off the biggest titles in the industry, forcing studios to guarantee consent and pay before AI could clone a single voice or face."
 image = "precedents/games.jpg"
+focus = "center 68%"
+union = "SAG-AFTRA · 2024"

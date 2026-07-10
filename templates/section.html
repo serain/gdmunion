@@ -79,8 +79,9 @@
         <span class="why-bar" aria-hidden="true"></span>
         <h2 class="why-heading">Why We're Doing This</h2>
         <p class="why-lead">
-          Since quietly dropping its founding AI principles, Google has doubled down on
-          pushing unethical uses of AI. Here are just some of the things they've been up to.
+          Since quietly dropping its pledge not to build AI-powered weapons or mass
+          surveillance, Google has doubled down on unethical applications of the technology.
+          Here are just some of the things they've been up to.
         </p>
         <a class="why-archive" href="{{ archive_url }}">
           More of these in our archive <span class="why-archive-arrow" aria-hidden="true">&rarr;</span>
@@ -134,21 +135,26 @@
     </div>
   </section>
 
-  <section id="story-so-far" class="section">
+  <section id="demands" class="section">
     <div class="container">
-      <h2 class="section-title">The Story So Far</h2>
-      <div class="section-content">
-        {{ section.extra.story_intro | markdown | safe }}
-        <h3 class="section-subtitle">What Next?</h3>
-        {{ section.extra.story_next | markdown | safe }}
-      </div>
+      <h2 class="section-title">Our Demands</h2>
+      <p class="section-intro section-intro--left">{{ section.extra.demands_intro }}</p>
     </div>
-  </section>
 
-  <section id="negotiate" class="section section--dark">
+    {% set demands = load_data(path="data/demands.toml") %}
+    <div class="demands-grid">
+      {% for d in demands.demand %}
+      <div class="demand-pillar">
+        <p class="demand-pillar-num">Demand {{ loop.index }}</p>
+        <h3 class="demand-pillar-title">{{ d.label }}</h3>
+        <div class="demand-pillar-text">{{ d.text | markdown | safe }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
     <div class="container">
-      <h2 class="section-title">What Negotiation Powers Do We Have?</h2>
       <div class="section-content">
+        <h3 class="section-subtitle">Can we negotiate on issues like these?</h3>
         {{ section.extra.negotiate_intro | markdown | safe }}
       </div>
     </div>
@@ -174,11 +180,23 @@
             <span class="precedent-card-body">
               <span class="precedent-card-bar"></span>
               <span class="precedent-card-text">{{ item.text }}</span>
+              {% if item.union %}<span class="precedent-card-meta">{{ item.union }}</span>{% endif %}
             </span>
           </span>
         </span>
       </div>
       {% endfor %}
+    </div>
+  </section>
+
+  <section id="story-so-far" class="section section--dark">
+    <div class="container">
+      <h2 class="section-title">The Story So Far</h2>
+      <div class="section-content">
+        {{ section.extra.story_intro | markdown | safe }}
+        <h3 class="section-subtitle">What Next?</h3>
+        {{ section.extra.story_next | markdown | safe }}
+      </div>
     </div>
   </section>
 

@@ -78,6 +78,8 @@ GDM union members want to include demands over **unethical military contracts**,
 **AI Safety / Principles**, and **job automation**.
 """
 
+demands_intro = "We want a real say on three things: the ethics of our technology, the future of our jobs, and the energy that powers it all."
+
 negotiate_intro = """
 The message from Google's leadership is that we can only negotiate pay, holiday and
 hours — the minimum scope guaranteed by law. **There is considerable historical

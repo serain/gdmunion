@@ -9,9 +9,14 @@
 
 <header class="site-header">
   <nav class="nav" aria-label="Main navigation">
-    <a href="{{ home_url }}" class="nav-logo-link" aria-label="GDM Union — home">
-      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="nav-logo">
-    </a>
+    <div class="brand-lockup">
+      <a href="{{ home_url }}" class="nav-logo-link" aria-label="GDM Union — home">
+        <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="nav-logo">
+      </a>
+      <span class="brand-affiliation" aria-label="at DeepMind">
+        <span class="at" aria-hidden="true">@</span><span class="name">DeepMind</span>
+      </span>
+    </div>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle-check" aria-hidden="true">
     <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation">
@@ -23,8 +28,8 @@
     <ul class="nav-links" role="list">
       <li><a href="{{ home_url }}#why">Why We're Doing This</a></li>
       <li><a href="{{ home_url }}#who-we-are">Who We Are</a></li>
+      <li><a href="{{ home_url }}#demands">Our Demands</a></li>
       <li><a href="{{ home_url }}#story-so-far">The Story So Far</a></li>
-      <li><a href="{{ home_url }}#negotiate">Negotiation Powers</a></li>
       <li><a href="{{ home_url }}#faq">FAQ</a></li>
       <li><a href="{{ archive_url }}"{% if nav_current is defined and nav_current == "archive" %} class="is-active" aria-current="page"{% endif %}>Archive</a></li>
       <li><a href="{{ config.extra.join_url }}" class="btn-join" rel="noopener noreferrer">Join</a></li>

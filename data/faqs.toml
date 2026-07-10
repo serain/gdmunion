@@ -23,6 +23,32 @@ Reg. 3.
 """
 
 [[faq]]
+question = "Who can join?"
+answer = """
+Membership is open to UK-based employees of Google DeepMind. Unfortunately
+contractors and colleagues based outside the UK (for example in the US) aren't
+eligible for this recognition campaign — but US colleagues can organise with our
+sister union, the [Alphabet Workers Union (AWU)](https://www.alphabetworkersunion.org/).
+"""
+
+[[faq]]
+question = "How much does it cost, and what do I get?"
+answer = """
+Membership is **£8.70 a month**. This covers the cost of running the union —
+trained organisers, legal advice, and support when you need it.
+
+In return you get:
+
+- A **vote** in shaping the union's demands — the agenda is set democratically by members, not a handful of reps.
+- Access to our **free legal helpline and advice from day one**.
+- **Individual representation** in disciplinary and grievance hearings (for issues arising after your first eight weeks of membership).
+- A range of everyday **member discounts** — shopping, travel, insurance, gym memberships and more.
+
+The strongest reason, though, is collective: every member makes our case for
+recognition stronger and the union harder to ignore.
+"""
+
+[[faq]]
 question = "What legal protection are we entitled to?"
 answer = """
 - **Protection from dismissal for union activity** — Section 152 TULRCA 1992

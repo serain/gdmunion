@@ -4,7 +4,12 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="footer-logo">
+    <div class="brand-lockup brand-lockup--footer">
+      <img src="{{ get_url(path='utaw-logo-white.png') }}" alt="UTAW — United Tech &amp; Allied Workers" class="footer-logo">
+      <span class="brand-affiliation" aria-label="at DeepMind">
+        <span class="at" aria-hidden="true">@</span><span class="name">DeepMind</span>
+      </span>
+    </div>
     <p class="footer-tagline">{{ tagline | markdown(inline=true) | safe }}</p>
     <a href="{{ config.extra.join_url }}" class="btn-cta" rel="noopener noreferrer">Join UTAW</a>
   </div>

@@ -1,0 +1,29 @@
+# The three demand pillars shown in the "Our Demands" section.
+# These distil the full campaign demands (hosted on UTAW) into the three
+# priorities the campaign organises around. Add or reorder by editing the
+# [[demand]] blocks. `text` supports Markdown.
+
+[[demand]]
+label = "Ethics & Transparency"
+text = """
+Restore and strengthen Google's abandoned AI Principles: a binding commitment
+not to build weapons or surveillance that harms people — backed by independent
+oversight, whistleblower protection, and the right to refuse work that crosses
+an ethical line.
+"""
+
+[[demand]]
+label = "Job Automation"
+text = """
+A real say before AI automates our roles. Google must consult our reps early,
+publish honest impact assessments, and exhaust retraining and redeployment
+before any AI-driven redundancies — not impose them after the decision is made.
+"""
+
+[[demand]]
+label = "Clean Energy"
+text = """
+AI's growth can't come at the planet's expense. We want data centres run on 24/7
+renewable power, an end to custom AI that accelerates fossil-fuel extraction, and
+a science-based climate roadmap that is independently verified.
+"""
