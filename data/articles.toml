@@ -1,38 +1,60 @@
 # News-article frames for the "Why We're Doing This" carousel on the homepage.
-# Placeholder copy for now — `summary` is where the short AI-written summary goes.
+# `summary` is a short digest foregrounding Google's role; these mirror entries
+# in the archive (data/archive.toml). Newest first.
 # Add a frame by copying an [[article]] block. Images live in static/articles/.
+#
+# `focus` sets background-position for the slide (the scrim is heavy on the left
+# and bottom, bright top-right — so bias the subject up and slightly right).
+#
+# Image credits (all free to use):
+#   ice-subpoena.jpg    — Paul Goyette, "No More Deportations protest at the
+#                         Broadview ICE facility", CC BY 4.0 (Wikimedia Commons)
+#   gaza-censorship.jpg — Hla.bashbash, "A mural on one of the bombed buildings
+#                         on Al Thawra Street", CC BY 4.0 (Wikimedia Commons)
+#   nimbus-cloud.jpg    — PiDatacenters, "Racks Amravati Data Center",
+#                         CC BY-SA 4.0 (Wikimedia Commons)
+#   gaza-famine.jpg     — Hla.bashbash, "A bombed car and the remains of a
+#                         destroyed building on Al Lababidi Street in the Gaza
+#                         Strip", CC BY 4.0 (Wikimedia Commons)
+#   ice-agents.jpg      — U.S. Immigration and Customs Enforcement (ERO officers,
+#                         West Palm Beach, Feb 2025), public domain (Wikimedia)
 
 [[article]]
-image = "articles/datacentre.jpg"
-title = "Lorem ipsum dolor sit amet consectetur"
-summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae mauris nec justo faucibus dignissim. Sed euismod, nunc vel tincidunt lacinia, nisl nisi aliquet."
-source = "Placeholder Source"
-date = "May 2026"
-
-[[article]]
-image = "articles/drone.jpg"
-title = "Sed do eiusmod tempor incididunt ut labore"
-summary = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit."
-source = "Placeholder Source"
-date = "April 2026"
-
-[[article]]
-image = "articles/surveillance.jpg"
-title = "Ut enim ad minim veniam quis nostrud"
-summary = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation."
-source = "Placeholder Source"
-date = "March 2026"
-
-[[article]]
-image = "articles/robotics.jpg"
-title = "Quis autem vel eum iure reprehenderit"
-summary = "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi."
-source = "Placeholder Source"
+image = "articles/ice-subpoena.jpg"
+focus = "center 38%"
+title = "Google Handed ICE a Student Journalist's Bank and Card Numbers"
+summary = "Google complied with an administrative ICE subpoena — no judge, no order to comply — and turned over a student journalist's bank and credit-card numbers, IP addresses and more, notifying him only after the fact. A friend served near-identical demands was warned in advance and beat them in court."
+source = "The Intercept"
 date = "February 2026"
 
 [[article]]
-image = "articles/protest.jpg"
-title = "Nemo enim ipsam voluptatem quia voluptas"
-summary = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore."
-source = "Placeholder Source"
-date = "January 2026"
+image = "articles/gaza-censorship.jpg"
+focus = "center 45%"
+title = "YouTube Erased 700+ Videos Documenting Human Rights Violations"
+summary = "Google's YouTube quietly deleted more than 700 videos and removed the accounts of three prominent Palestinian human-rights groups, wiping out first-hand documentation of abuses — a purge the reporting ties to compliance with US sanctions."
+source = "The Intercept"
+date = "November 2025"
+
+[[article]]
+image = "articles/nimbus-cloud.jpg"
+focus = "center"
+title = "Israel Demanded a Secret 'Wink' to Sidestep Legal Orders"
+summary = "To win the $1.2bn Project Nimbus contract, Google agreed to bypass its own terms of service and covertly signal — a 'wink' — to Israel whenever a foreign court legally compelled it to hand over data, with payouts scaled to the country's dialling code. Officials conceded it 'might collide' with US law."
+source = "The Guardian"
+date = "October 2025"
+
+[[article]]
+image = "articles/gaza-famine.jpg"
+focus = "center 60%"
+title = "Google Ruled Israel's 'There Is Food in Gaza' Ads Aren't Misleading"
+summary = "Google took a six-month, $45m contract to carry the Israeli government's messaging — then its own Trust & Safety team ruled that state ads insisting 'there is food in Gaza', promoted to millions after the UN declared famine, didn't breach its policy on misleading ads. The referee was on the payroll."
+source = "The Washington Post"
+date = "October 2025"
+
+[[article]]
+image = "articles/ice-agents.jpg"
+focus = "center 42%"
+title = "Google Called ICE Agents a 'Vulnerable Group' to Pull a Tracking App"
+summary = "Google removed the ICE-spotting app 'Red Dot' from its Play Store, classifying armed federal agents as a 'vulnerable group' — while continuing to host a Customs and Border Protection app that uses facial recognition to identify immigrants."
+source = "404 Media"
+date = "October 2025"
