@@ -88,6 +88,16 @@
       dot.addEventListener('click', function () { show(i); });
     });
 
+    // Slow 2× while the pointer is over the carousel
+    root.addEventListener('mouseenter', function () {
+      root.style.setProperty('--why-interval', ((INTERVAL_MS * 2) / 1000) + 's');
+      restartClock();
+    });
+    root.addEventListener('mouseleave', function () {
+      root.style.setProperty('--why-interval', (INTERVAL_MS / 1000) + 's');
+      restartClock();
+    });
+
     // Pause when keyboard focus enters the carousel
     root.addEventListener('focusin', pause);
     root.addEventListener('focusout', function (e) {
