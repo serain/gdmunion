@@ -579,14 +579,13 @@ body {
   position: relative;
   overflow: hidden;
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr) auto;
-  grid-template-rows: 1fr auto;
+  grid-template-columns: minmax(280px, 30%) 1fr;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "space   space    space"
-    "static  caption  controls";
-  align-items: end;
-  column-gap: clamp(1.5rem, 4vw, 3.5rem);
-  min-height: clamp(430px, 56vh, 540px);
+    "static   caption"
+    ".        caption"
+    "controls caption";
+  min-height: clamp(400px, 52vh, 480px);
   color: var(--white);
 }
 
@@ -604,24 +603,26 @@ body {
 
 .why-slide.is-active { opacity: 1; }
 
-/* Vignette — a strong bottom wash carries the whole desktop text band; a
-   lighter top wash covers the progress bar (and the heading once stacked on
-   mobile). The photo stays bright through the middle. */
+/* L-shaped scrim — the left wash carries the static framing column and the
+   bottom wash carries the rotating summary, so text stays crisply legible on
+   any photo while the top-right stays bright and photographic. */
 .why-scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(0deg,   rgba(1, 21, 72, 0.95) 0%, rgba(1, 21, 72, 0.55) 24%, rgba(1, 21, 72, 0.05) 50%),
-    linear-gradient(180deg, rgba(1, 21, 72, 0.6) 0%, transparent 24%);
+    linear-gradient(90deg, rgba(1, 21, 72, 0.92) 0%, rgba(1, 21, 72, 0.8) 26%, rgba(1, 21, 72, 0.28) 44%, transparent 60%),
+    linear-gradient(0deg,  rgba(1, 21, 72, 0.93) 0%, rgba(1, 21, 72, 0.55) 26%, rgba(1, 21, 72, 0.15) 42%, transparent 55%);
 }
 
-/* Static framing — bottom-left on desktop, top on mobile */
+/* Static framing — top-left; the heading, intro and archive link. The inner
+   (right) padding is tighter than the outer so the separator tucks close to
+   the text measure instead of drifting on column slack. */
 .why-static {
   grid-area: static;
   position: relative;
   z-index: 1;
-  padding: 0 0 var(--why-pad) var(--why-pad);
-  max-width: 42ch;
+  padding: var(--why-pad) clamp(1.25rem, 2.5vw, 2.25rem) 0 var(--why-pad);
+  max-width: 44ch;
 }
 
 .why-bar {
@@ -633,19 +634,21 @@ body {
   margin-bottom: 1.35rem;
 }
 
+/* The static framing is the section's PRIMARY text — sized like the other
+   section titles so it clearly outranks the rotating article snippet. */
 .why-heading {
-  font-size: clamp(1.4rem, 2.1vw, 1.85rem);
+  font-size: var(--fs-headline);
   font-weight: 800;
-  line-height: 1.12;
+  line-height: 1.1;
   letter-spacing: -0.015em;
   text-wrap: balance;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .why-lead {
-  font-size: 1rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.82);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
   max-width: 42ch;
 }
 
@@ -665,20 +668,39 @@ body {
 
 .why-archive:hover { color: var(--white); border-bottom-color: var(--white); }
 
-/* Article caption — the middle of the bottom band. Captions share one grid
-   cell so they cross-fade in place and the cell reserves the height of the
-   tallest one, so nothing jumps between slides. */
+/* Thin vertical divider on the column boundary between the static framing and
+   the photo stage — mostly opaque through the middle, fading at both ends.
+   Grid areas must be rectangular, so it's placed explicitly across all rows. */
+.why-sep {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  justify-self: start;
+  align-self: stretch;
+  position: relative;
+  z-index: 1;
+  width: 1px;
+  margin: var(--why-pad) 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.5) 18%, rgba(255, 255, 255, 0.5) 82%, transparent 100%);
+}
+
+/* Article caption — anchored bottom-left of the photo stage. Captions share
+   one grid cell so they cross-fade in place and the cell reserves the height
+   of the tallest one, so nothing jumps between slides. */
 .why-captions {
   grid-area: caption;
+  align-self: end;
+  justify-self: start;
   position: relative;
   z-index: 1;
   display: grid;
   min-width: 0;
-  padding-bottom: var(--why-pad);
+  max-width: 56ch;
+  padding: 0 var(--why-pad) var(--why-pad) clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .why-caption {
   grid-area: 1 / 1;
+  align-self: end; /* short captions share the bottom baseline, growing upward */
   opacity: 0;
 }
 
@@ -709,30 +731,32 @@ body {
   background: var(--cyan);
 }
 
+/* The rotating article is SECONDARY — a caption, not a headline. Its title
+   sits well below the static heading and its body below the static lead. */
 .why-slide-title {
-  font-size: clamp(1.35rem, 2.3vw, 2rem);
-  font-weight: 800;
-  line-height: 1.14;
-  letter-spacing: -0.015em;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
   text-wrap: balance;
-  margin-bottom: 0.85rem;
-  max-width: 28ch;
+  margin-bottom: 0.5rem;
+  max-width: 44ch;
 }
 
 .why-slide-text {
-  font-size: var(--fs-lead);
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.9);
-  max-width: 60ch;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 58ch;
 }
 
 .why-slide-meta {
-  margin-top: 1.1rem;
-  font-size: 0.8rem;
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* Auto-advance progress bar — spans the full stage width along the top.
@@ -775,10 +799,13 @@ body {
    band on desktop; a full-width row under the caption on mobile. */
 .why-controls {
   grid-area: controls;
+  align-self: end;
+  position: relative;
+  z-index: 1;
   display: none;
   align-items: center;
   gap: 1rem;
-  padding: 0 var(--why-pad) var(--why-pad) 0;
+  padding: 1.25rem var(--why-pad) var(--why-pad);
 }
 
 .why-stage.is-enhanced .why-controls { display: flex; }
@@ -790,13 +817,13 @@ body {
 }
 
 .why-dot {
-  width: 18px;
-  height: 18px;
+  width: 8px;
+  height: 8px;
   flex-shrink: 0;
   padding: 0;
   border: none;
   border-radius: 999px;
-  background: red;
+  background: rgba(255, 255, 255, 0.45);
   cursor: pointer;
 }
 
@@ -863,23 +890,34 @@ body {
 @media (max-width: 820px) {
   .why-stage {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto auto;
+    grid-template-rows: auto 1fr auto auto auto;
     grid-template-areas:
       "static"
-      "space"
+      "."
+      "separator"
       "caption"
       "controls";
-    align-items: stretch;
-    column-gap: 0;
-    min-height: clamp(520px, 74vh, 600px);
+    min-height: clamp(520px, 76vh, 620px);
   }
 
-  .why-static  { padding: var(--why-pad) var(--why-pad) 0; max-width: none; }
-  .why-captions { padding: 1.5rem var(--why-pad) 0; }
+  .why-static  { max-width: none; padding: var(--why-pad) var(--why-pad) 0; }
+  .why-captions { align-self: auto; max-width: none; padding: 0 var(--why-pad) 0.5rem; }
+
+  /* Separator goes horizontal again when stacked */
+  .why-sep {
+    grid-area: separator;
+    justify-self: stretch;
+    align-self: auto;
+    width: auto;
+    height: 1px;
+    margin: 0 var(--why-pad) 1.25rem;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 68%, transparent 100%);
+  }
 
   .why-controls {
+    align-self: auto;
     justify-content: space-between;
-    padding: 1.5rem var(--why-pad) var(--why-pad);
+    padding: 1.25rem var(--why-pad) var(--why-pad);
   }
 
   .why-slide-title { max-width: none; }
@@ -888,8 +926,8 @@ body {
      a bright band left in the middle for the immersive photo. */
   .why-scrim {
     background:
-      linear-gradient(180deg, rgba(1, 21, 72, 0.92) 0%, rgba(1, 21, 72, 0.45) 24%, transparent 46%),
-      linear-gradient(0deg,   rgba(1, 21, 72, 0.94) 0%, rgba(1, 21, 72, 0.45) 32%, transparent 60%);
+      linear-gradient(180deg, rgba(1, 21, 72, 0.94) 0%, rgba(1, 21, 72, 0.6) 24%, rgba(1, 21, 72, 0.2) 40%, transparent 52%),
+      linear-gradient(0deg,   rgba(1, 21, 72, 0.94) 0%, rgba(1, 21, 72, 0.48) 32%, transparent 60%);
   }
 }
 
