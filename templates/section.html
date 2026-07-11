@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ config.title }}</title>
+  <title>{{ config.title }} &mdash; DeepMind Employees are Unionising</title>
   <meta name="description"         content="{{ config.description }}">
 
   <meta property="og:site_name"    content="{{ config.title }}">
@@ -62,11 +62,15 @@
     <div class="why-stage" data-carousel role="region" aria-roledescription="carousel"
          aria-label="Recent news about Google and AI">
 
-      {# Rotating photos — decorative background, behind the overlaid text #}
+      {# Rotating photos — decorative background, behind the overlaid text.
+         Only the first photo is inlined so first paint pulls a single image;
+         the rest ride in data-bg and carousel.js decodes them during idle
+         time (see loadSlide). With no JS the first slide still shows. #}
       <div class="why-track" data-track aria-hidden="true">
         {% for a in articles.article %}
         <div class="why-slide{% if loop.first %} is-active{% endif %}" data-slide
-             style="background-image: url('{{ get_url(path=a.image) }}'); background-position: {{ a.focus | default(value='center') }}"></div>
+             {% if not loop.first %}data-bg="{{ get_url(path=a.image) }}"{% endif %}
+             style="{% if loop.first %}background-image: url('{{ get_url(path=a.image) }}'); {% endif %}background-position: {{ a.focus | default(value='center') }}"></div>
         {% endfor %}
       </div>
       <div class="why-scrim" aria-hidden="true"></div>

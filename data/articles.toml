@@ -11,19 +11,19 @@
 # the image allows it).
 #
 # Image credits (all free to use, Wikimedia Commons):
-#   google-hq.jpg         — The Pancake of Heaven!, "Googleplex HQ (cropped)",
+#   google-hq.webp         — The Pancake of Heaven!, "Googleplex HQ (cropped)",
 #                            CC BY-SA 4.0
-#   israel-military.jpg   — IDF Spokesperson's Unit, "IDF soldiers using
+#   israel-military.webp   — IDF Spokesperson's Unit, "IDF soldiers using
 #                            magnifiers in gaza 2024", CC BY-SA 3.0
-#   gaza-displaced.jpg    — Jaber Jehad Badwan, "The return of displaced
+#   gaza-displaced.webp    — Jaber Jehad Badwan, "The return of displaced
 #                            Palestinians from the south to the northern Gaza
 #                            Strip", CC BY-SA 4.0
-#   pentagon.jpg          — DoD photo by Master Sgt. Ken Hammond, U.S. Air
+#   pentagon.webp          — DoD photo by Master Sgt. Ken Hammond, U.S. Air
 #                            Force, "The Pentagon US Department of Defense
 #                            building", public domain
 
 [[article]]
-image = "articles/google-hq.jpg"
+image = "articles/google-hq.webp"
 focus = "60% 35%"
 title = "Google Erased Its Own Ban on AI for Weapons and Surveillance"
 summary = "Weeks into Trump's second term, Google quietly deleted its 2018 pledge never to build AI weapons or rights-violating surveillance, made after staff protests over a military drone contract. It wasn't framed as a reversal: the sole edit note read, 'We've made updates to our AI Principles.'"
@@ -32,7 +32,7 @@ date = "February 2025"
 url = "https://web.archive.org/web/20250205002852/https://www.wired.com/story/google-responsible-ai-principles/"
 
 [[article]]
-image = "articles/israel-military.jpg"
+image = "articles/israel-military.webp"
 focus = "center 30%"
 title = "Google's Own Lawyers Warned Its AI Could Enable Human Rights Abuses. It Signed Anyway."
 summary = "Google's own lawyers and consultants warned that providing AI to the Israeli military 'could be used for, or linked to, the facilitation of human rights violations,' and urged withholding the technology entirely. Google signed the $1.2bn deal anyway, keeping no reliable way to monitor how it was used."
@@ -41,7 +41,7 @@ date = "December 2024"
 url = "https://web.archive.org/web/20251225203735/https://www.nytimes.com/2024/12/03/technology/google-israel-contract-project-nimbus.html"
 
 [[article]]
-image = "articles/gaza-displaced.jpg"
+image = "articles/gaza-displaced.webp"
 focus = "center 55%"
 title = "Israel Used Google Photos to Build a Gaza 'Hit List'"
 summary = "An Israeli official said Google Photos' face-matching 'worked better' than purpose-built tools in Israel's Gaza-wide facial-recognition dragnet, helping build a 'hit list'. Thousands were detained, some tortured. Asked to explain, Google declined."
@@ -50,7 +50,7 @@ date = "April 2024"
 url = "https://web.archive.org/web/20240406013247/https://theintercept.com/2024/04/05/google-photos-israel-gaza-facial-recognition/"
 
 [[article]]
-image = "articles/pentagon.jpg"
+image = "articles/pentagon.webp"
 focus = "center 60%"
 title = "Google Signed the Pentagon Clause a Rival Refused on Ethics Grounds"
 summary = "The Pentagon signed deals with eight AI firms, Google included, to power an 'AI-first fighting force,' agreeing to 'any lawful use' of their models. Rival Anthropic refused that clause, fearing mass surveillance and autonomous weapons, and was branded a 'supply-chain risk' for it. Google signed."

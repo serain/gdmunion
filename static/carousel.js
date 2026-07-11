@@ -26,6 +26,26 @@
     var current = 0;
     var autoplay = !reduceMotion;
 
+    /* Lazy backgrounds. Only slide 0's photo is inlined in the HTML; the rest
+       carry their URL in data-bg. We decode each into a detached Image first,
+       then swap it onto the slide once it's ready so the cross-fade never
+       flashes an empty frame. Idle-warm them all up front (there's ample time
+       before the 7s clock reaches them); show() also loads on demand in case a
+       viewer jumps ahead of the prefetch. */
+    function loadSlide(i) {
+      var s = slides[i];
+      if (!s || s.dataset.bgLoaded) return;
+      s.dataset.bgLoaded = '1'; // guard: one request per slide, even mid-flight
+      var url = s.getAttribute('data-bg');
+      if (!url) return;         // slide 0 is already inlined
+      var img = new Image();
+      img.onload = function () { s.style.backgroundImage = "url('" + url + "')"; };
+      img.src = url;
+    }
+
+    var idle = window.requestIdleCallback || function (fn) { return setTimeout(fn, 200); };
+    idle(function () { slides.forEach(function (_, i) { loadSlide(i); }); });
+
     root.style.setProperty('--why-interval', (INTERVAL_MS / 1000) + 's');
     root.classList.add('is-enhanced');
 
@@ -47,6 +67,7 @@
       next = (next + slides.length) % slides.length;
       if (next === current) { restartClock(); return; }
 
+      loadSlide(next); // safety net if the viewer outruns the idle prefetch
       setActive(current, false);
       current = next;
       setActive(current, true);
@@ -88,14 +109,12 @@
       dot.addEventListener('click', function () { show(i); });
     });
 
-    // Slow 2× while the pointer is over the carousel
-    root.addEventListener('mouseenter', function () {
-      root.style.setProperty('--why-interval', ((INTERVAL_MS * 2) / 1000) + 's');
-      restartClock();
-    });
+    // Pause (freezing the progress bar) while the pointer is over the carousel
+    root.addEventListener('mouseenter', pause);
     root.addEventListener('mouseleave', function () {
-      root.style.setProperty('--why-interval', (INTERVAL_MS / 1000) + 's');
-      restartClock();
+      // Don't resume if keyboard focus is still inside the carousel.
+      if (root.contains(document.activeElement)) return;
+      resume();
     });
 
     // Pause when keyboard focus enters the carousel
