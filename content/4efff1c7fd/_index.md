@@ -56,7 +56,7 @@ original mission.
 
 story_intro = """
 On **May the 4th**, Google DeepMind workers voted to unionise, with Unite the Union and
-the Union of Tech and Allied Workers (UTAW) being our official representatives. That same
+the United Tech & Allied Workers (UTAW) being our official representatives. That same
 day, GDM UTAW and Unite the Union members at Google DeepMind asked for voluntary
 recognition, which would make our union official. **Google declined the request**, but
 agreed to meet via the ACAS conciliation service. On July 1st 2026, we entered
