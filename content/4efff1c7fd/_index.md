@@ -19,8 +19,8 @@ tldr = """
 AI safety, workplace automation, and unethical uses of technology (including military
 contracts) — the future of Artificial Intelligence is in the balance.
 
-FTEs across GDM UK believe in protecting and honouring Google DeepMind's original mission
-of benefitting humanity.
+Full-time employees (FTEs) across Google DeepMind (GDM) UK believe in protecting and
+honouring its original mission of benefitting humanity.
 
 That's why we're Unionising and campaigning for legal union recognition — so we can have a
 real say on how AI affects jobs and ensure it is used ethically.
