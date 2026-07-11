@@ -57,15 +57,6 @@ theme = "workers"
 sev = 4
 
 [[article]]
-date = "May 9, 2026"
-title = "Google developers significantly misstate carbon emissions of proposed UK datacentres"
-url = "https://www.theguardian.com/technology/2026/may/09/google-developers-significantly-misstate-carbon-emissions-of-proposed-uk-datacentres"
-source = "theguardian.com"
-summary = "Google developers understated the carbon emissions of two proposed Essex AI datacentres by a factor of five in planning documents, comparing one year of emissions against the UK's entire five-year carbon budget, according to analysis by the tech justice nonprofit Foxglove."
-theme = "climate"
-sev = 4
-
-[[article]]
 date = "May 13, 2026"
 title = "Data Center Cooling Water Discharge: Assessing Environmental Transparency and Information Gaps"
 url = "https://repository.uclawsf.edu/hastings_environmental_law_journal/vol32/iss2/4"
@@ -73,6 +64,15 @@ source = "UC Law Environmental Journal"
 summary = "A law journal article examines the environmental impacts of data center cooling water discharge and the lack of transparency in discharge practices, finding that most cooling water data remains confidential, making it difficult to assess whether practices protect water systems."
 theme = "climate"
 sev = 3
+
+[[article]]
+date = "May 9, 2026"
+title = "Google developers significantly misstate carbon emissions of proposed UK datacentres"
+url = "https://www.theguardian.com/technology/2026/may/09/google-developers-significantly-misstate-carbon-emissions-of-proposed-uk-datacentres"
+source = "theguardian.com"
+summary = "Google developers understated the carbon emissions of two proposed Essex AI datacentres by a factor of five in planning documents, comparing one year of emissions against the UK's entire five-year carbon budget, according to analysis by the tech justice nonprofit Foxglove."
+theme = "climate"
+sev = 4
 
 [[article]]
 date = "May 4, 2026"
