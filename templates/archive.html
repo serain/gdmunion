@@ -35,8 +35,30 @@
   .am-status{margin-left:auto;font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums;}
   .am-status button{background:none;border:0;color:var(--blue);font:inherit;font-weight:700;cursor:pointer;padding:0 0 0 .5rem;}
   .am-status button:hover{text-decoration:underline;}
+  .am-scroll-wrap{position:relative;}
   .am-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;position:relative;}
   .am-svg{display:block;width:100%;min-width:660px;height:auto;}
+  /* Mobile scroll cue: edge fades + a nudging "Scroll" pill, shown only while
+     the timeline overflows its container and hidden as you reach each edge. */
+  .am-fade{position:absolute;top:0;bottom:0;width:52px;pointer-events:none;
+    opacity:0;transition:opacity .2s ease;z-index:5;}
+  .am-fade-l{left:0;background:linear-gradient(to left,rgba(255,255,255,0),#fff 85%);}
+  .am-fade-r{right:0;background:linear-gradient(to right,rgba(255,255,255,0),#fff 85%);}
+  .am-scroll-wrap.am-ovf:not(.am-at-start) .am-fade-l{opacity:1;}
+  .am-scroll-wrap.am-ovf:not(.am-at-end)   .am-fade-r{opacity:1;}
+  .am-hint{position:absolute;right:10px;bottom:10px;z-index:6;pointer-events:none;
+    display:inline-flex;align-items:center;gap:.28rem;
+    font:800 .72rem/1 'Barlow',sans-serif;letter-spacing:.02em;
+    color:#fff;background:var(--navy);padding:.42rem .6rem .42rem .68rem;border-radius:20px;
+    box-shadow:0 6px 18px -6px rgba(1,21,72,.55);
+    opacity:0;transform:translateX(5px);transition:opacity .25s ease,transform .25s ease;}
+  .am-hint svg{width:13px;height:13px;}
+  .am-scroll-wrap.am-ovf.am-at-start .am-hint{opacity:.95;transform:none;}
+  @media (prefers-reduced-motion:no-preference){
+    .am-scroll-wrap.am-ovf.am-at-start .am-hint svg{animation:amNudge 1.15s ease-in-out infinite;}
+  }
+  @keyframes amNudge{0%,100%{transform:translateX(0);}50%{transform:translateX(3px);}}
+  @media (prefers-reduced-motion:reduce){.am-fade,.am-hint{transition:none;}}
   .am-grid{stroke:rgba(1,21,72,.08);stroke-width:1;}
   .am-yr{fill:var(--muted);font:600 11px ui-monospace,Menlo,monospace;opacity:.7;}
   .am-lane-lbl{fill:var(--navy);font:700 12px 'Barlow',sans-serif;}
@@ -50,7 +72,7 @@
   .am-mk{stroke:var(--am-marker);stroke-width:1.6;stroke-dasharray:3 4;opacity:.85;}
   .am-mk-lbl{fill:var(--am-marker);font:700 10.5px 'Barlow',sans-serif;}
   .am-mk-dot{fill:var(--am-marker);}
-  .am-tip{position:absolute;z-index:20;pointer-events:none;max-width:280px;background:var(--navy);
+  .am-tip{position:absolute;top:0;left:0;z-index:20;pointer-events:none;max-width:280px;background:var(--navy);
     color:#fff;border-radius:10px;padding:.6rem .7rem;box-shadow:0 12px 30px -8px rgba(1,21,72,.5);
     opacity:0;transform:translateY(4px);transition:opacity .12s ease;font-size:.84rem;}
   .am-tip.am-on{opacity:1;transform:none;}
@@ -85,9 +107,16 @@
           <div class="am-controls" role="group" aria-label="Filter the archive by theme">
             <span class="am-status" hidden></span>
           </div>
-          <div class="am-scroll">
-            <svg class="am-svg" role="img" aria-label="Timeline of the archived articles, grouped into five theme lanes from 2020 to 2026. The full data is in the table below."></svg>
-            <div class="am-tip" aria-hidden="true"></div>
+          <div class="am-scroll-wrap">
+            <div class="am-scroll">
+              <svg class="am-svg" role="img" aria-label="Timeline of the archived articles, grouped into five theme lanes from 2020 to 2026. The full data is in the table below."></svg>
+              <div class="am-tip" aria-hidden="true"></div>
+            </div>
+            <span class="am-fade am-fade-l" aria-hidden="true"></span>
+            <span class="am-fade am-fade-r" aria-hidden="true"></span>
+            <span class="am-hint" aria-hidden="true">Scroll
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
           </div>
         </figure>
 
@@ -331,7 +360,24 @@
     THEMES.forEach(function(t){ chip(t.k, t.name, t.c); });
 
     apply();
+
+    // Mobile scroll cue: reflect the scroller's overflow state as classes on the
+    // wrapper so the edge fades and the "Scroll" hint show only when relevant.
+    var wrap = scroll.parentNode;
+    function updateCue(){
+      var max = scroll.scrollWidth - scroll.clientWidth;
+      wrap.classList.toggle('am-ovf', max > 4);
+      wrap.classList.toggle('am-at-start', scroll.scrollLeft <= 2);
+      wrap.classList.toggle('am-at-end', scroll.scrollLeft >= max - 2);
+    }
+    scroll.addEventListener('scroll', updateCue, {passive:true});
+    window.addEventListener('resize', updateCue);
+
     fig.removeAttribute('hidden');
+    updateCue();
+    // Re-measure once fonts/layout settle (SVG width can shift on font swap).
+    requestAnimationFrame(updateCue);
+    setTimeout(updateCue, 400);
   })();
   </script>
 
