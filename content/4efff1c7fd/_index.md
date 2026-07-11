@@ -1,5 +1,5 @@
 +++
-title = "GDM Union"
+title = "UTAW at DeepMind"
 
 # Prose copy for the page. The repeating collections live in their own files:
 #   data/precedents.toml  — the "wins" cards

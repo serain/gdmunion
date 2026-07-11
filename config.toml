@@ -1,5 +1,5 @@
 base_url = "https://www.gdmunion.co.uk"
-title = "GDM Union"
+title = "UTAW at DeepMind"
 description = "FTEs across Google DeepMind UK are unionising for a real say over AI safety, unethical military contracts, and automation. Join us."
 default_language = "en"
 minify_html = true

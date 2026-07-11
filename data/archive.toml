@@ -16,7 +16,7 @@ date = "July 3, 2026"
 title = "Google DeepMind Unionization Talks Are Off to a Rocky Start"
 url = "https://www.wired.com/story/google-deepmind-unionization-talks-are-off-to-a-rocky-start/"
 source = "wired.com"
-summary = "Google DeepMind's initial union recognition talks with the CWU and Unite stalled after senior leadership failed to attend the first Acas-arbitrated meeting, leading employees to allege bad-faith bargaining and union-busting tactics including shutting down internal dissent channels, set against Google's expanding military AI contracts."
+summary = "Google DeepMind's initial union recognition talks with UTAW and Unite stalled after senior leadership failed to attend the first Acas-arbitrated meeting, leading employees to allege bad-faith bargaining and union-busting tactics including shutting down internal dissent channels, set against Google's expanding military AI contracts."
 theme = "workers"
 sev = 5
 
@@ -52,7 +52,7 @@ date = "May 22, 2026"
 title = "Google rejects initial union recognition bid and starts talks with Acas"
 url = "https://web.archive.org/web/20260610140027/https://www.personneltoday.com/hr/google-rejects-initial-union-recognition-bid/"
 source = "personneltoday.com"
-summary = "Google declined the CWU and Unite's request for voluntary recognition of its DeepMind staff, offering instead to negotiate through the Acas conciliation service, an early step toward what could become Google's first recognised UK union."
+summary = "Google declined UTAW and Unite's request for voluntary recognition of its DeepMind staff, offering instead to negotiate through the Acas conciliation service, an early step toward what could become Google's first recognised UK union."
 theme = "workers"
 sev = 4
 
@@ -79,7 +79,7 @@ date = "May 4, 2026"
 title = "Google DeepMind workers in UK vote to unionize amid deal with US military"
 url = "https://www.theguardian.com/us-news/2026/may/04/google-deepmind-uk-workers-union"
 source = "theguardian.com"
-summary = "Google DeepMind's UK staff voted to unionise and asked Google to recognise the CWU and Unite as their representatives, a bid driven largely by Google's new US military AI deal and workers' concerns about AI empowering authoritarianism and surveillance."
+summary = "Google DeepMind's UK staff voted to unionise and asked Google to recognise UTAW and Unite as their representatives, a bid driven largely by Google's new US military AI deal and workers' concerns about AI empowering authoritarianism and surveillance."
 theme = "workers"
 sev = 3
 
