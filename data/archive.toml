@@ -12,6 +12,15 @@
 #             Google's role. Edit freely.
 
 [[article]]
+date = "July 20, 2026"
+title = "Google Is Censoring Reviews of ICE Detention Centers"
+url = "https://theintercept.com/2026/07/20/google-maps-reviews-ice-detention-centers/"
+source = "theintercept.com"
+summary = "Google Maps has been systematically deleting user reviews and disabling new ones for dozens of ICE detention facilities, erasing thousands of firsthand accounts from detainees and relatives describing conditions inside the jails, under a policy Google says covers places people visit 'without choice'."
+theme = "ice"
+sev = 5
+
+[[article]]
 date = "July 3, 2026"
 title = "Google DeepMind Unionization Talks Are Off to a Rocky Start"
 url = "https://www.wired.com/story/google-deepmind-unionization-talks-are-off-to-a-rocky-start/"
