@@ -1,0 +1,1474 @@
+/* ─── 1. Custom properties ─────────────────────────────────────── */
+:root {
+  --navy:      #011548;
+  --blue:      #1565C0;
+  --blue-dark: #0D47A1;
+  --cyan:      #29B6F6;
+  --white:     #ffffff;
+  --text:      #0F172A;
+  --muted:     #374151;
+  --border:    rgba(0, 0, 0, 0.09);
+
+  /* Type scale */
+  --fs-display:  clamp(1.5rem, 7vw, 4rem);
+  --fs-headline: clamp(1.75rem, 3.5vw, 2.25rem);
+  --fs-lead:     clamp(1.125rem, 2vw, 1.25rem);
+  --fs-body:     1.0625rem;
+  --fs-label:    0.8125rem;
+
+  --nav-h: 70px;
+}
+
+/* ─── 2. Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ─── 3. Base ───────────────────────────────────────────────────── */
+body {
+  font-family: 'Barlow', -apple-system, BlinkMacSystemFont, "Segoe UI",
+               Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ─── 4. Layout ─────────────────────────────────────────────────── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+/* ─── 5. Navigation ─────────────────────────────────────────────── */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--navy);
+  z-index: 100;
+}
+
+.nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: var(--nav-h);
+}
+
+.nav-logo {
+  height: 46px;
+  width: auto;
+}
+
+/* Co-brand lockup: UTAW logo + "@ DeepMind" affiliation. Shared by the
+   nav and footer; size is set per-context below. */
+.brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.brand-affiliation {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.26em;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Hairline rule between the logo and the affiliation, feathered at both
+   ends so it reads as a refined divider rather than a hard bar. */
+.brand-affiliation::before {
+  content: '';
+  align-self: center;
+  width: 1px;
+  height: 1.5em;
+  margin-right: 0.26em;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.34) 20%,
+    rgba(255, 255, 255, 0.34) 80%,
+    transparent
+  );
+}
+
+.brand-affiliation .at {
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.brand-affiliation .name {
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+
+.nav .brand-affiliation { font-size: 1.05rem; }
+
+/* Hidden checkbox powers the mobile toggle — no JS needed */
+.nav-toggle-check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px 4px;
+}
+
+.nav-toggle-label span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Cyan underline accent on hover (skips the Join button) */
+.nav-links a:not(.btn-join) { position: relative; }
+
+.nav-links a:not(.btn-join)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.nav-links a:hover { color: var(--white); }
+.nav-links a:not(.btn-join):hover::after { transform: scaleX(1); }
+
+.nav-links .btn-join {
+  display: inline-block;
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.4rem 1.1rem;
+  border-radius: 3px;
+  font-weight: 700;
+}
+
+.nav-links .btn-join:hover { background: var(--blue-dark); }
+
+/* ─── 6. Hero ───────────────────────────────────────────────────── */
+.hero {
+  background: var(--blue);
+  color: var(--white);
+  padding: 6rem 0 5.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Concentric "radar" rings on the right — the flyer's signature motif.
+   Masked so they fade out behind the text on the left. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-radial-gradient(
+    circle at 88% 42%,
+    transparent 0 70px,
+    rgba(255, 255, 255, 0.13) 70px 72px
+  );
+  -webkit-mask-image: linear-gradient(to right, transparent 28%, #000 72%);
+          mask-image: linear-gradient(to right, transparent 28%, #000 72%);
+}
+
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: var(--fs-display);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  max-width: 700px;
+  margin-bottom: 1.5rem;
+}
+
+.hero .tagline {
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-quote {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: clamp(1.3rem, 2.8vw, 1.65rem);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.btn-hero {
+  display: inline-block;
+  background: var(--white);
+  color: var(--blue);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 0.9rem 2.25rem;
+  border-radius: 4px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+}
+
+.btn-hero:hover { background: rgba(255, 255, 255, 0.9); }
+
+.hero-reason {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 42ch;
+  margin: 0;
+}
+
+/* ─── 7. Section base ───────────────────────────────────────────── */
+/* scroll-margin keeps anchored headings clear of the sticky nav */
+.section { padding: 4.5rem 0; scroll-margin-top: var(--nav-h); }
+
+.section--dark {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Centered single column: a real headline introduces each section */
+.section-title {
+  font-size: var(--fs-headline);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--navy);
+  max-width: 720px;
+  margin: 0 auto 2.25rem;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+/* Short cyan accent rule under each headline — echoes the hero eyebrow */
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+}
+
+.section--dark .section-title { color: var(--white); }
+
+/* Optional one-line intro under a section title */
+.section-intro {
+  text-align: center;
+  max-width: 560px;
+  margin: -1rem auto 2.75rem;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.section--dark .section-intro { color: rgba(255, 255, 255, 0.75); }
+
+/* Sub-heading inside a section (e.g. "What Next?" within "The Story So Far") */
+.section-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.005em;
+  color: var(--blue);
+  margin: 2.25rem 0 0.75rem;
+}
+
+.section-subtitle::before {
+  content: '';
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+  flex-shrink: 0;
+}
+
+.section--dark .section-subtitle { color: var(--white); }
+
+/* ─── 8. Section content typography ────────────────────────────── */
+.section-content {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.section-content p {
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.section-content p:last-child { margin-bottom: 0; }
+
+.section--tldr .section-content p {
+  font-size: var(--fs-body);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* The key takeaway — the punchy lead line */
+.section--tldr .section-content .tldr-lead {
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--blue);
+  margin-bottom: 1.25rem;
+}
+
+/* Make the key TL;DR callout pop in brand blue */
+.section--tldr .section-content strong { color: var(--blue); }
+
+.section--dark .section-content p      { color: rgba(255, 255, 255, 0.85); }
+.section--dark .section-content strong { color: var(--white); }
+
+/* Content links — cyan-accented underline (blue on light, cyan on dark) */
+.section-content a,
+.faq-body a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-color: var(--cyan);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.section-content a:hover,
+.faq-body a:hover {
+  color: var(--blue-dark);
+  text-decoration-color: var(--blue-dark);
+}
+
+.section--dark .section-content a {
+  color: var(--cyan);
+  text-decoration-color: rgba(41, 182, 246, 0.5);
+}
+
+.section--dark .section-content a:hover {
+  color: var(--white);
+  text-decoration-color: var(--white);
+}
+
+/* ─── 9. TL;DR section ──────────────────────────────────────────── */
+.section--tldr { background: #f4f8ff; }
+
+/* ─── 10. Lists ─────────────────────────────────────────────────── */
+.section-content ul {
+  list-style: none;
+  margin-top: 0.75rem;
+}
+
+.section-content ul li {
+  padding: 0.75rem 0 0.75rem 1.75rem;
+  position: relative;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-content ul li:last-child { border-bottom: none; }
+
+.section-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 1.15rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--blue);
+}
+
+.section--dark .section-content ul li {
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.section--dark .section-content ul li::before { background: var(--cyan); }
+
+/* Markdown wraps <li> text in <p> — remove the margin */
+.section-content ul li p { margin: 0; }
+
+/* ─── 11. Note block ────────────────────────────────────────────── */
+.note {
+  margin-top: 1.75rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.07);
+  border-left: 3px solid rgba(255, 255, 255, 0.25);
+  font-style: italic;
+}
+
+.note p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 0;
+}
+
+/* ─── Our Demands pillars ──────────────────────────────────────── */
+/* Three distilled priorities, sitting above the precedent "proof" grid in the
+   same section. Cards are subtly tinted with a cyan top accent so they read as
+   a set on the light section without competing with the darker precedent grid
+   below. */
+.demands-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.demand-pillar {
+  position: relative;
+  padding: 1.85rem 1.5rem 1.65rem;
+  background: #f4f8ff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Cyan top accent — echoes the section-title rule and precedent-card bar */
+.demand-pillar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--cyan);
+}
+
+.demand-pillar-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.6rem;
+}
+
+.demand-pillar-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--navy);
+  margin-bottom: 0.65rem;
+  text-wrap: balance;
+}
+
+.demand-pillar-text,
+.demand-pillar-text p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Gap between the "Can we actually win this?" transition and the pillars */
+#demands .section-content { margin-top: 3.25rem; }
+
+@media (max-width: 820px) {
+  .demands-grid { grid-template-columns: 1fr; max-width: 460px; }
+}
+
+/* ─── Precedent cards (the "wins" gallery, flip-to-reveal) ──────── */
+.precedent-grid {
+  max-width: 1120px;
+  margin: 3rem auto 0;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem 1.5rem;
+}
+
+.precedent-card {
+  display: block;
+  aspect-ratio: 6 / 5;
+  cursor: pointer;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px -8px rgba(1, 21, 72, 0.5);
+  -webkit-perspective: 1200px;
+  perspective: 1200px;
+}
+
+.precedent-card:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+.precedent-card-inner {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: 14px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  /* NOTE: never put `filter` (or anything else that creates a containing
+     block) on this element — it flattens the 3D context and breaks
+     backface-visibility on the faces. */
+}
+
+.precedent-card:hover .precedent-card-inner,
+.precedent-card:focus-visible .precedent-card-inner {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+.precedent-card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 14px;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* The photo (--card-img, set inline per card) with the navy wash layered
+   over it in a single background — darkest where the text sits, so any
+   photo stays legible. Baking the gradient into the background (rather than
+   a positioned overlay) means the title paints on top with no z-index, and
+   nothing creates a stacking context to flatten the 3D flip. --card-pos lets
+   individual cards (data/precedents.toml `focus`) re-centre a cover-cropped
+   photo so the subject — not empty sky — sits inside the shorter frame. */
+.precedent-card-front {
+  background-image:
+    linear-gradient(to top,
+      rgba(1, 21, 72, 0.97) 0%,
+      rgba(1, 21, 72, 0.85) 30%,
+      rgba(1, 21, 72, 0.38) 62%,
+      rgba(1, 21, 72, 0.08) 100%),
+    var(--card-img);
+  background-size: cover;
+  background-position: var(--card-pos, center);
+}
+
+/* Static hint that the card flips — hidden on desktop, where :hover already
+   telegraphs it. Below 900px (touch/tablet territory, no reliable :hover)
+   it's the only cue, so it's switched on in the media query further down. */
+.precedent-card-flip {
+  display: none;
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(1, 21, 72, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--white);
+  pointer-events: none;
+}
+
+.precedent-card-flip svg {
+  width: 15px;
+  height: 15px;
+}
+
+.precedent-card-back {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+  background: var(--blue-dark);
+  justify-content: center;
+}
+
+.precedent-card-body {
+  display: block;
+  padding: 1.375rem;
+  color: var(--white);
+}
+
+.precedent-card-bar {
+  display: block;
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+  margin-bottom: 0.75rem;
+}
+
+.precedent-card-win {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  min-height: 2.5em;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.precedent-card-text {
+  display: block;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Which union actually won it — echoes .why-slide-meta's muted, uppercase
+   source/date treatment so the two "proof" patterns on the page read as
+   one system. */
+.precedent-card-meta {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 900px) {
+  .precedent-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .precedent-card-flip { display: flex; }
+}
+
+@media (max-width: 560px) {
+  .precedent-grid { grid-template-columns: 1fr; }
+  .precedent-card { aspect-ratio: 3 / 2; }
+}
+
+/* Keep the "@ DeepMind" lockup from crowding the mobile hamburger */
+@media (max-width: 400px) {
+  .brand-lockup { gap: 0.6rem; }
+  .nav .brand-affiliation { font-size: 0.95rem; }
+}
+
+/* ─── "Why We're Doing This" carousel ──────────────────────────────
+   One immersive, full-bleed stage: the news photos rotate as the
+   background while text is overlaid in the corners. A 3-row grid inside
+   the stage keeps the layout collision-proof at any size — the static
+   heading pins to the top, the article caption + controls sit in a bottom
+   bar, and a flexible gap sits between. Photos are absolutely behind the
+   grid; each caption cross-fades in sync with its photo. Progressive
+   enhancement: with no JS the first photo + caption show and the controls
+   stay hidden; carousel.js adds `.is-enhanced` to reveal them and autoplay. */
+.why {
+  position: relative;
+  background: var(--navy);
+  overflow: hidden;
+  scroll-margin-top: var(--nav-h);
+}
+
+.why-stage {
+  --why-pad: clamp(1.5rem, 4vw, 3.5rem);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(280px, 30%) 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "static   caption"
+    ".        caption"
+    "controls caption";
+  min-height: clamp(400px, 52vh, 480px);
+  color: var(--white);
+}
+
+/* Rotating photos — absolutely behind the grid content */
+.why-track { position: absolute; inset: 0; }
+
+.why-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  will-change: transform;
+}
+
+.why-slide.is-active { opacity: 1; }
+
+/* L-shaped scrim — the left wash carries the static framing column and the
+   bottom wash carries the rotating summary, so text stays crisply legible on
+   any photo while the top-right stays bright and photographic. */
+.why-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(1, 21, 72, 0.92) 0%, rgba(1, 21, 72, 0.8) 26%, rgba(1, 21, 72, 0.28) 44%, transparent 60%),
+    linear-gradient(0deg,  rgba(1, 21, 72, 0.93) 0%, rgba(1, 21, 72, 0.55) 26%, rgba(1, 21, 72, 0.15) 42%, transparent 55%);
+}
+
+/* Static framing — top-left; the heading, intro and archive link. The inner
+   (right) padding is tighter than the outer so the separator tucks close to
+   the text measure instead of drifting on column slack. */
+.why-static {
+  grid-area: static;
+  position: relative;
+  z-index: 1;
+  padding: var(--why-pad) clamp(1.25rem, 2.5vw, 2.25rem) 0 var(--why-pad);
+  max-width: 44ch;
+}
+
+.why-bar {
+  display: block;
+  width: 44px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--cyan);
+  margin-bottom: 1.35rem;
+}
+
+/* The static framing is the section's PRIMARY text — sized like the other
+   section titles so it clearly outranks the rotating article snippet. */
+.why-heading {
+  font-size: var(--fs-headline);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  margin-bottom: 1rem;
+}
+
+.why-lead {
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 42ch;
+}
+
+.why-archive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  color: var(--cyan);
+  text-decoration: none;
+  padding-bottom: 3px;
+  border-bottom: 2px solid rgba(41, 182, 246, 0.4);
+}
+
+.why-archive:hover { color: var(--white); border-bottom-color: var(--white); }
+
+/* Thin vertical divider on the column boundary between the static framing and
+   the photo stage — mostly opaque through the middle, fading at both ends.
+   Grid areas must be rectangular, so it's placed explicitly across all rows. */
+.why-sep {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  justify-self: start;
+  align-self: stretch;
+  position: relative;
+  z-index: 1;
+  width: 1px;
+  margin: var(--why-pad) 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.5) 18%, rgba(255, 255, 255, 0.5) 82%, transparent 100%);
+}
+
+/* Article caption — anchored bottom-left of the photo stage. Captions share
+   one grid cell so they cross-fade in place and the cell reserves the height
+   of the tallest one, so nothing jumps between slides. */
+.why-captions {
+  grid-area: caption;
+  align-self: end;
+  justify-self: start;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-width: 0;
+  max-width: 56ch;
+  padding: 0 var(--why-pad) var(--why-pad) clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.why-caption {
+  grid-area: 1 / 1;
+  align-self: end; /* short captions share the bottom baseline, growing upward */
+  opacity: 0;
+}
+
+.why-caption.is-active { opacity: 1; }
+
+.why-caption:not(.is-active) { pointer-events: none; }
+
+
+/* The rotating article is SECONDARY — a caption, not a headline. Its title
+   sits well below the static heading and its body below the static lead. */
+.why-slide-title {
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  margin-bottom: 0.5rem;
+  max-width: 44ch;
+}
+
+.why-slide-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 58ch;
+}
+
+.why-slide-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.why-slide-meta:hover {
+  color: var(--white);
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+.why-slide-meta-arrow {
+  font-size: 0.85em;
+  transition: transform 0.2s ease;
+}
+
+.why-slide-meta:hover .why-slide-meta-arrow { transform: translate(2px, -2px); }
+
+/* Auto-advance progress bar — spans the full stage width along the top.
+   Doubles as the autoplay clock: carousel.js advances when it finishes. */
+.why-progress {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.14);
+  z-index: 6;
+  overflow: hidden;
+}
+
+.why-progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--cyan);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.why-stage.is-enhanced.is-playing .why-progress { display: block; }
+
+.why-stage.is-playing .why-progress span {
+  animation: whyProgress var(--why-interval, 7s) linear forwards;
+}
+
+.why-stage.is-paused .why-progress span { animation-play-state: paused; }
+
+@keyframes whyProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Controls — hidden until JS enhances the carousel. Far-right of the bottom
+   band on desktop; a full-width row under the caption on mobile. */
+.why-controls {
+  grid-area: controls;
+  align-self: end;
+  position: relative;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem var(--why-pad) var(--why-pad);
+}
+
+.why-stage.is-enhanced .why-controls { display: flex; }
+
+.why-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.why-dot {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+}
+
+.why-dot:hover { background: rgba(255, 255, 255, 0.7); }
+
+.why-dot.is-active {
+  width: 24px;
+  background: var(--cyan);
+}
+
+.why-arrows {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.why-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+
+.why-arrow svg { width: 20px; height: 20px; }
+
+.why-arrow:hover {
+  background: var(--cyan);
+  border-color: var(--cyan);
+  color: var(--navy);
+}
+
+/* Clean seam into the dark "Who We Are" section that follows */
+.why + .section--dark { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .why-slide,
+  .why-caption     { transition: opacity 0.8s ease; }
+  .why-archive-arrow { transition: transform 0.2s ease; }
+  .why-archive:hover .why-archive-arrow { transform: translateX(4px); }
+  .why-dot,
+  .why-arrow       { transition: background 0.15s, border-color 0.15s, color 0.15s, width 0.25s ease; }
+  .why-slide.is-active { animation: whyZoom 9s ease-out forwards; }
+}
+
+/* Subtle Ken Burns drift on the active photo */
+@keyframes whyZoom {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.12); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .why-progress { display: none !important; }
+}
+
+/* Narrow screens: restack the band — framing on top, then the photo, then
+   the caption and controls at the bottom (the order that reads best). */
+@media (max-width: 820px) {
+  .why-stage {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto auto auto;
+    grid-template-areas:
+      "static"
+      "."
+      "separator"
+      "caption"
+      "controls";
+    min-height: clamp(520px, 76vh, 620px);
+  }
+
+  .why-static  { max-width: none; padding: var(--why-pad) var(--why-pad) 0; }
+  .why-captions { align-self: auto; max-width: none; padding: 0 var(--why-pad) 0.5rem; }
+
+  /* Separator goes horizontal again when stacked */
+  .why-sep {
+    grid-area: separator;
+    justify-self: stretch;
+    align-self: auto;
+    width: auto;
+    height: 1px;
+    margin: 0 var(--why-pad) 1.25rem;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.08) 68%, transparent 100%);
+  }
+
+  .why-controls {
+    align-self: auto;
+    justify-content: space-between;
+    padding: 1.25rem var(--why-pad) var(--why-pad);
+  }
+
+  .why-slide-title { max-width: none; }
+
+  /* Stronger top + bottom washes — the stacked text needs more cover, with
+     a bright band left in the middle for the immersive photo. */
+  .why-scrim {
+    background:
+      linear-gradient(180deg, rgba(1, 21, 72, 0.94) 0%, rgba(1, 21, 72, 0.6) 24%, rgba(1, 21, 72, 0.2) 40%, transparent 52%),
+      linear-gradient(0deg,   rgba(1, 21, 72, 0.94) 0%, rgba(1, 21, 72, 0.48) 32%, transparent 60%);
+  }
+}
+
+/* ─── 12. FAQ accordion ─────────────────────────────────────────── */
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item:last-child { border-bottom: none; }
+
+.faq-item summary {
+  padding: 1.25rem 0;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.25rem;
+  color: var(--text);
+}
+
+.faq-item summary:hover  { color: var(--blue); }
+.faq-item[open] summary  { color: var(--blue); }
+
+/* Hide native disclosure triangle cross-browser */
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::marker              { display: none; }
+
+/* "+" marker that rotates to "×" when open */
+.faq-item summary::after {
+  content: '+';
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--blue);
+  flex-shrink: 0;
+  line-height: 1;
+  transform-origin: center;
+}
+
+.faq-item[open] summary::after { transform: rotate(45deg); }
+
+.faq-body {
+  padding: 0 0 1.25rem;
+}
+
+.faq-body p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.faq-body p:last-child { margin-bottom: 0; }
+
+.faq-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.25rem 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.faq-body ul li {
+  font-size: 1rem;
+  border-bottom: none;
+}
+
+.faq-body ul li::before {
+  top: 1.35rem;
+  background: var(--blue);
+}
+
+/* ─── 13. Footer ────────────────────────────────────────────────── */
+.footer {
+  background: var(--navy);
+  color: var(--white);
+  padding: 4rem 0 0;
+  text-align: center;
+}
+
+/* Cyan stripe — matches the flyer's bottom accent bar */
+.footer::after {
+  content: '';
+  display: block;
+  height: 5px;
+  background: var(--cyan);
+}
+
+.footer-inner { padding: 0 2rem 3.5rem; }
+
+.brand-lockup--footer {
+  justify-content: center;
+  gap: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer .brand-affiliation { font-size: 1.4rem; }
+
+.footer-logo {
+  height: 64px;
+  width: auto;
+}
+
+.footer-tagline {
+  font-size: clamp(1.5rem, 3.2vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 auto 2.25rem;
+  max-width: 780px;
+  color: var(--white);
+}
+
+/* Put the call-to-action sentence on its own line, in cyan */
+.footer-tagline strong {
+  display: block;
+  color: var(--cyan);
+}
+
+.btn-cta {
+  display: inline-block;
+  background: var(--blue);
+  color: var(--white);
+  padding: 0.85rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.btn-cta:hover { background: var(--blue-dark); }
+
+/* ─── 14. Focus / accessibility ─────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.site-header :focus-visible,
+.footer :focus-visible {
+  outline-color: var(--white);
+}
+
+/* ─── 15. Motion preference ─────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+
+  .nav-links a,
+  .btn-cta,
+  .btn-hero,
+  .nav-links .btn-join { transition: background 0.15s, color 0.15s, opacity 0.15s; }
+
+  .nav-links a:not(.btn-join)::after { transition: transform 0.2s ease; }
+
+  .faq-item summary          { transition: color 0.15s; }
+  .faq-item summary::after   { transition: transform 0.2s ease, color 0.15s; }
+
+  .precedent-card-inner      { transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1); }
+  .update-card                { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+}
+
+/* ─── 16. Responsive ────────────────────────────────────────────── */
+/* Nav switches to the hamburger menu well before the mobile breakpoint.
+   The full link row (logo + 6 links + Join) only actually fits starting
+   ~955px — below that the row wraps to a second line under the logo,
+   with zero vertical clearance around the Join button. That range covers
+   essentially every tablet in portrait *and* narrow landscape, so we jump
+   straight from mobile to the single-line desktop row with margin to spare. */
+@media (max-width: 1000px) {
+  .nav-toggle-label { display: flex; }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    width: 100%;
+    padding: 0.25rem 0 1rem;
+  }
+
+  .nav-links li { width: 100%; }
+
+  .nav-links a {
+    display: block;
+    padding: 0.75rem 0;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-links .btn-join {
+    display: block;
+    margin-top: 0.75rem;
+    padding: 0.65rem 0;
+    text-align: center;
+    border-radius: 3px;
+    border-bottom: none;
+  }
+
+  .nav:has(.nav-toggle-check:checked) .nav-links { display: flex; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-toggle-label span { transition: transform 0.2s, opacity 0.2s; }
+  }
+
+  .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav:has(.nav-toggle-check:checked) .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 720px) {
+  .section { padding: 3rem 0; }
+
+  .section-title { margin-bottom: 1.75rem; }
+
+  .hero { padding: 3.5rem 0 3rem; }
+}
+
+/* ─── 12. Archive page ──────────────────────────────────────────── */
+/* Accessibility helper: hidden visually, still read by assistive tech */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Logo becomes a link back to the homepage in the shared nav */
+.nav-logo-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+/* Persistent active state for the current top-level page in the nav */
+.nav-links a.is-active { color: var(--white); }
+.nav-links a.is-active:not(.btn-join)::after { transform: scaleX(1); }
+
+/* Sticky footer: keep the footer at the bottom on short pages */
+body.page-archive {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.archive-main { flex: 1 0 auto; }
+/* Left-justified body-text intro — the Archive page and the Our Demands
+   section use this instead of the centered lead default: a 640px column of
+   left-aligned prose, centred within its (wider) container. */
+.archive-main .section-intro,
+.section-intro--left {
+  text-align: left;
+  max-width: 640px;
+  margin-top: 0;
+  margin-inline: auto;
+  margin-bottom: 2.75rem;
+  font-size: var(--fs-body);
+  line-height: 1.75;
+}
+
+/* A wider column than the prose default so the table can breathe */
+.container--wide { max-width: 1100px; }
+
+/* Archive table. Designed to read as one filed system with the timeline map
+   above it: the same card, the same lane colours carried as a spine down each
+   row, and dates/sources set as monospaced archival metadata.
+   `table-layout: fixed` pins the table to exactly its card width at every
+   viewport, so content wraps to fit and an inner scrollbar never appears. */
+.archive-table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+.archive-table-wrap:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.archive-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  text-align: left;
+}
+.col-date    { width: 12%; }
+.col-article { width: 28%; }
+.col-summary { width: 45%; }
+.col-source  { width: 15%; }
+
+/* Header — echoes the navy nav. */
+.archive-table thead th {
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.8rem 1.1rem;
+}
+
+/* Body cells */
+.archive-table tbody td,
+.archive-table tbody th {
+  padding: 1.05rem 1.1rem;
+  border-top: 1px solid var(--border);
+  vertical-align: top;
+  font-weight: 400;
+}
+.archive-table tbody tr { transition: background 0.14s ease; }
+
+/* Theme spine — the map's lane colours, filed down the left edge of each row. */
+.archive-table tbody tr[data-theme="policy"]   { --row: #2a78d6; }
+.archive-table tbody tr[data-theme="military"] { --row: #eda100; }
+.archive-table tbody tr[data-theme="israel"]   { --row: #e34948; }
+.archive-table tbody tr[data-theme="ice"]      { --row: #4a3aa7; }
+.archive-table tbody tr[data-theme="climate"]  { --row: #008300; }
+.archive-table tbody tr[data-theme="workers"]  { --row: #1baf7a; }
+.archive-table tbody td.archive-date {
+  box-shadow: inset 3px 0 0 var(--row, transparent);
+}
+
+.archive-table tbody tr:hover { background: rgba(41, 182, 246, 0.07); }
+
+/* Date — archival metadata: monospaced, tabular, quiet; clears the spine. */
+.archive-date {
+  color: var(--muted);
+  font-family: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  padding-left: 1.4rem;
+}
+
+/* Title — the focal column */
+.archive-title {
+  font-weight: 600;
+  text-align: left;
+}
+.archive-title a {
+  color: var(--blue-dark);
+  text-decoration: none;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.archive-title a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
+.archive-title-arrow {
+  color: var(--cyan);
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0.6;
+}
+.archive-title a:hover .archive-title-arrow { opacity: 1; }
+
+/* Summary — the substance. */
+.archive-summary {
+  color: #2b3542;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* Source — a citation: the domain, monospaced and quiet; long domains break. */
+.archive-source {
+  color: var(--muted);
+  font-family: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .archive-table { font-size: 0.875rem; }
+  .archive-table thead th {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    padding: 0.6rem 0.5rem;
+  }
+  .archive-table tbody td,
+  .archive-table tbody th { padding: 0.75rem 0.5rem; }
+  .archive-date { padding-left: 0.85rem; font-size: 0.72rem; }
+  .archive-summary { font-size: 0.82rem; }
+}
